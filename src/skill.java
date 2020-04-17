@@ -17,5 +17,10 @@ public class skill {
     public void setSkillLevel(competency skillLevel) {
         this.skillLevel = skillLevel;
     }
+
+    public skill(String skillName, competency skillLevel) {
+        this.skillName = skillName;
+        this.skillLevel = skillLevel;
+    }
 }
 
