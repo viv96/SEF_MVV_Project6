@@ -1,0 +1,25 @@
+public class project {
+    public String project_name;
+    public String project_status;
+
+    public project (String project_name, String project_status){
+        this.project_name = project_name;
+        this.project_status = project_status;
+    }
+
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
+    }
+
+    public String getProject_status() {
+        return project_status;
+    }
+
+    public void setProject_status(String project_status) {
+        this.project_status = project_status;
+    }
+}
