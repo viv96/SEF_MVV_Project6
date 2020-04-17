@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class project {
-    public String project_name;
-    public String project_status;
+    private String project_name;
+    private String project_status;
+    private ArrayList<activity> activities = new ArrayList<activity>();
 
     public project (String project_name, String project_status){
         this.project_name = project_name;

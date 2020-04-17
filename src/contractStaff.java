@@ -21,4 +21,5 @@ public class contractStaff extends staff{
         }
         return false;
     }
+
 }

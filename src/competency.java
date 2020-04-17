@@ -4,4 +4,5 @@ public enum competency {
     INTERMEDIATE,
     ADVANCED,
     EXPERT;
+
 }

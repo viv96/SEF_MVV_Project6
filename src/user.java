@@ -32,4 +32,5 @@ public class user {
         this.name = name;
         this.password = password;
     }
+
 }
