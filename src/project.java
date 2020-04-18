@@ -6,6 +6,13 @@ public class Project implements Serializable {
     private String projectStatus;
     private ArrayList<Activity> activities = new ArrayList<Activity>();
 
+    public Project(String projectName, String projectStatus, ArrayList<Activity> activities) {
+        super();
+        this.projectName = projectName;
+        this.projectStatus = projectStatus;
+        this.activities = activities;
+    }
+
     public String getProjectName() {
         return this.projectName;
     }
@@ -22,14 +29,8 @@ public class Project implements Serializable {
         this.projectStatus = projectStatus;
     }
 
-    public Project (String projectName, String projectStatus) {
-        super();
-        this.projectName = projectName;
-        this.projectStatus = projectName;
-    }
-
     @Override
     public String toString() {
-        return "project [name = " + this.projectName + ", status = " + this.projectStatus + "]";
+        return "project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = [" + this.activities + "]";
     }
 }

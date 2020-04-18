@@ -1,3 +1,5 @@
+import enumerations.Competency;
+
 public class Skill {
     private String skillName;
     private Competency skillLevel;
@@ -23,6 +25,9 @@ public class Skill {
         this.skillLevel = skillLevel;
     }
 
-
+    @Override
+    public String toString() {
+        return "Skill [name = " + this.skillName + ", level = " + this.skillLevel.toString() + "]";
+    }
 }
 

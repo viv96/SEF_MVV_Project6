@@ -1,3 +1,6 @@
+import enumerations.Competency;
+import enumerations.Status;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,6 +9,11 @@ public class Staff extends User {
     private ArrayList<Skill> skills = new ArrayList<Skill>();
 //    private int staffSpot;
     Scanner scan = new Scanner(System.in);
+    
+    public Staff(String id, String name, String password, String role) {
+        super(id, name, password);
+        this.role = role;
+    }
 
     public String getRole() {
         return role;
@@ -23,11 +31,6 @@ public class Staff extends User {
         this.skills = skills;
     }
 
-    public Staff(String id, String name, String password, String role) {
-        super(id, name, password);
-        this.role = role;
-    }
-
     public Boolean spotter(ArrayList<String> list, String element){
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) == element) {
@@ -38,9 +41,9 @@ public class Staff extends User {
     }
 
     public Boolean specifyAvailability(){
-        int Y = 2016;    // year
+        int Y = 2020;    // year
         int startDayOfMonth = 5;
-        int spaces = 0;
+        int spaces = startDayOfMonth;
 
         // months[i] = name of month i
         String[] months = {
@@ -87,12 +90,12 @@ public class Staff extends User {
         return true;
     }
 
-    public Status updateActivity(Activity act){
+    public Status updateActivity(Activity act) {
         int chooseStatus;
         scan = new Scanner(System.in);
         
-        if (spotter(act.getActStaff(),getId())){
-            System.out.print("Choose a status for the activity:\n1. To Do\n2. Pending\n3. In Progress\n4. Completed\nyour choice: ");
+        if (spotter(act.getActStaff(),getId())) {
+            System.out.print("Choose a enumerations.status for the activity:\n1. To Do\n2. Pending\n3. In Progress\n4. Completed\nyour choice: ");
             chooseStatus = scan.nextInt();
             switch (chooseStatus) {
                 case 1: {
@@ -107,8 +110,8 @@ public class Staff extends User {
                 case 4: {
                     return Status.COMPLETED;
                 }
-                default: {
-                    System.out.print("Choose a valid status");
+                default:{
+                    System.out.print("Choose a valid enumerations.status");
                     updateActivity(act);
                     break;
                 }
@@ -119,13 +122,24 @@ public class Staff extends User {
     }
 
     public Boolean updateSkill(String skillName, Competency level){
-        Skill newSkill = new Skill(skillName, level);
+        Skill newSkill = new Skill(skillName,level);
 
-        if (getSkills().contains(newSkill)) {
+        if (getSkills().contains(newSkill)){
+            for (Skill skill : skills) {
+                if (skill.getSkillName().equals(skillName)) {
+                    skill.setSkillLevel(level);
+                    return true;
+                }
+            }
             return false;
         }
         skills.add(new Skill(skillName, level));
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Staff [role = " + this.role + ", skill = " + this.skills + "]";
     }
 }
