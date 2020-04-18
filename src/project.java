@@ -5,9 +5,10 @@ public class project {
     private String project_status;
     private ArrayList<activity> activities = new ArrayList<activity>();
 
-    public project (String project_name, String project_status){
+    public project(String project_name, String project_status, ArrayList<activity> activities) {
         this.project_name = project_name;
         this.project_status = project_status;
+        this.activities = activities;
     }
 
     public String getProject_name() {
