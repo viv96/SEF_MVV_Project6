@@ -23,6 +23,5 @@ public class skill {
         this.skillLevel = skillLevel;
     }
 
-
 }
 

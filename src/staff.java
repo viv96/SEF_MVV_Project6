@@ -38,9 +38,9 @@ public class staff extends user{
     }
 
     public Boolean specifyAvailability(){
-        int Y = 2016;    // year
+        int Y = 2020;    // year
         int startDayOfMonth = 5;
-        int spaces = 0;
+        int spaces = startDayOfMonth;
 
         // months[i] = name of month i
         String[] months = {
@@ -119,6 +119,12 @@ public class staff extends user{
     public Boolean updateSkill(String skillName, competency level){
         skill newSkill = new skill(skillName,level);
         if (getSkills().contains(newSkill)){
+            for (skill skill : skills) {
+                if (skill.getSkillName().equals(skillName)) {
+                    skill.setSkillLevel(level);
+                    return true;
+                }
+            }
             return false;
         }
         skills.add(new skill(skillName, level));
