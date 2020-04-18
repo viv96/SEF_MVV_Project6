@@ -1,3 +1,6 @@
+import enumerations.competency;
+import enumerations.status;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -91,7 +94,7 @@ public class staff extends user{
         scan = new Scanner(System.in);
         int chooseStatus;
         if (spotter(act.getActStaff(),getId())){
-            System.out.print("Choose a status for the activity:\n1. To Do\n2. Pending\n3. In Progress\n4. Completed\nyour choice: ");
+            System.out.print("Choose a enumerations.status for the activity:\n1. To Do\n2. Pending\n3. In Progress\n4. Completed\nyour choice: ");
             chooseStatus = scan.nextInt();
             switch (chooseStatus){
                 case 1: {
@@ -107,7 +110,7 @@ public class staff extends user{
                     return status.COMPLETED;
                 }
                 default:{
-                    System.out.print("Choose a valid status");
+                    System.out.print("Choose a valid enumerations.status");
                     updateActivity(act);
                     break;
                 }

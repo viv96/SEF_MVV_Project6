@@ -1,3 +1,5 @@
+package enumerations;
+
 public enum competency {
     BEGINNER,
     NOVICE,

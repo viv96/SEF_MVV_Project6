@@ -1,3 +1,5 @@
+package enumerations;
+
 public enum status {
     NO_ACCESS,
     TO_DO,

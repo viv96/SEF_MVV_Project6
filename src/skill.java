@@ -1,3 +1,5 @@
+import enumerations.competency;
+
 public class skill {
     private String skillName;
     private competency skillLevel;
