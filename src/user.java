@@ -1,4 +1,6 @@
-public class user {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String id;
     private String name;
     private String password;
@@ -27,10 +29,15 @@ public class user {
         this.password = password;
     }
 
-    public user(String id, String name, String password) {
+    public User(String id, String name, String password) {
+        super();
         this.id = id;
         this.name = name;
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "user [id = " + this.id + ", name = " + this.name + ", password = " + this.password + "]";
+    }
 }

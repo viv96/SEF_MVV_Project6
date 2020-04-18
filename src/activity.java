@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class activity {
+public class Activity {
     private String actID;
     private ArrayList<String> actStaff = new ArrayList<String>();
-    private status actStatus;
+    private Status actStatus;
     private int actDuration; //to be calculated in weeks, might change the data type later.
 
-    public activity(String actID, status actStatus, int actDuration) {
+    public Activity(String actID, Status actStatus, int actDuration) {
         this.actID = actID;
         this.actStatus = actStatus;
         this.actDuration = actDuration;
@@ -36,11 +36,11 @@ public class activity {
         this.actStaff = actStaff;
     }
 
-    public status getActStatus() {
+    public Status getActStatus() {
         return actStatus;
     }
 
-    public void setActStatus(status actStatus) {
+    public void setActStatus(Status actStatus) {
         this.actStatus = actStatus;
     }
 }

@@ -1,6 +1,6 @@
-public class skill {
+public class Skill {
     private String skillName;
-    private competency skillLevel;
+    private Competency skillLevel;
 
     public String getSkillName() {
         return skillName;
@@ -10,15 +10,15 @@ public class skill {
         this.skillName = skillName;
     }
 
-    public competency getSkillLevel() {
+    public Competency getSkillLevel() {
         return skillLevel;
     }
 
-    public void setSkillLevel(competency skillLevel) {
+    public void setSkillLevel(Competency skillLevel) {
         this.skillLevel = skillLevel;
     }
 
-    public skill(String skillName, competency skillLevel) {
+    public Skill(String skillName, Competency skillLevel) {
         this.skillName = skillName;
         this.skillLevel = skillLevel;
     }

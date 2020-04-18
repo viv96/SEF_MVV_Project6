@@ -1,4 +1,4 @@
-public enum status {
+public enum Status {
     NO_ACCESS,
     TO_DO,
     PENDING,

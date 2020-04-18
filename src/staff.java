@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class staff extends user{
+public class Staff extends User {
     private String role;
-    private ArrayList<skill> skills = new ArrayList<skill>();
+    private ArrayList<Skill> skills = new ArrayList<Skill>();
 //    private int staffSpot;
     Scanner scan = new Scanner(System.in);
 
@@ -15,22 +15,22 @@ public class staff extends user{
         this.role = role;
     }
 
-    public ArrayList<skill> getSkills() {
+    public ArrayList<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(ArrayList<skill> skills) {
+    public void setSkills(ArrayList<Skill> skills) {
         this.skills = skills;
     }
 
-    public staff(String id, String name, String password, String role) {
+    public Staff(String id, String name, String password, String role) {
         super(id, name, password);
         this.role = role;
     }
 
     public Boolean spotter(ArrayList<String> list, String element){
-        for (int i=0;i<list.size();i++){
-            if(list.get(i)==element){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == element) {
                 return true;
             }
         }
@@ -81,47 +81,51 @@ public class staff extends user{
                 System.out.printf(" %3d ", i);
                 if (((i + spaces) % 7 == 0) || (i == days[M])) System.out.println();
             }
-
             System.out.println();
         }
+
         return true;
     }
 
-    public status updateActivity(activity act){
-        scan = new Scanner(System.in);
+    public Status updateActivity(Activity act){
         int chooseStatus;
+        scan = new Scanner(System.in);
+        
         if (spotter(act.getActStaff(),getId())){
             System.out.print("Choose a status for the activity:\n1. To Do\n2. Pending\n3. In Progress\n4. Completed\nyour choice: ");
             chooseStatus = scan.nextInt();
-            switch (chooseStatus){
+            switch (chooseStatus) {
                 case 1: {
-                    return status.TO_DO;
+                    return Status.TO_DO;
                 }
                 case 2: {
-                    return status.PENDING;
+                    return Status.PENDING;
                 }
                 case 3: {
-                    return status.IN_PROGRESS;
+                    return Status.IN_PROGRESS;
                 }
                 case 4: {
-                    return status.COMPLETED;
+                    return Status.COMPLETED;
                 }
-                default:{
+                default: {
                     System.out.print("Choose a valid status");
                     updateActivity(act);
                     break;
                 }
             }
         }
-        return status.NO_ACCESS;
+
+        return Status.NO_ACCESS;
     }
 
-    public Boolean updateSkill(String skillName, competency level){
-        skill newSkill = new skill(skillName,level);
-        if (getSkills().contains(newSkill)){
+    public Boolean updateSkill(String skillName, Competency level){
+        Skill newSkill = new Skill(skillName, level);
+
+        if (getSkills().contains(newSkill)) {
             return false;
         }
-        skills.add(new skill(skillName, level));
+        skills.add(new Skill(skillName, level));
+
         return true;
     }
 }

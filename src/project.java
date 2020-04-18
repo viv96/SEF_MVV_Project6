@@ -1,28 +1,35 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class project {
-    private String project_name;
-    private String project_status;
-    private ArrayList<activity> activities = new ArrayList<activity>();
+public class Project implements Serializable {
+    private String projectName;
+    private String projectStatus;
+    private ArrayList<Activity> activities = new ArrayList<Activity>();
 
-    public project (String project_name, String project_status){
-        this.project_name = project_name;
-        this.project_status = project_status;
+    public String getProjectName() {
+        return this.projectName;
     }
 
-    public String getProject_name() {
-        return project_name;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public void setProject_name(String project_name) {
-        this.project_name = project_name;
+    public String getProjectStatus() {
+        return this.projectStatus;
     }
 
-    public String getProject_status() {
-        return project_status;
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
     }
 
-    public void setProject_status(String project_status) {
-        this.project_status = project_status;
+    public Project (String projectName, String projectStatus) {
+        super();
+        this.projectName = projectName;
+        this.projectStatus = projectName;
+    }
+
+    @Override
+    public String toString() {
+        return "project [name = " + this.projectName + ", status = " + this.projectStatus + "]";
     }
 }

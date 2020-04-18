@@ -1,15 +1,7 @@
-public class contractStaff extends staff{
+public class ContractStaff extends Staff {
     private double rate;
 
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public contractStaff(String id, String name, String password, String role, double rate) {
+    public ContractStaff(String id, String name, String password, String role, double rate) {
         super(id, name, password, role);
         this.rate = rate;
     }
@@ -22,4 +14,11 @@ public class contractStaff extends staff{
         return false;
     }
 
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 }
