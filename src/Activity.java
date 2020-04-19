@@ -77,6 +77,6 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "Activity [id = " + this.actID + ", staff = " + this.actStaff + ", status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate +  ", duration = " + String.valueOf(this.actDuration) + "]";
+        return "Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate +  ", duration = " + String.valueOf(this.actDuration) + "]";
     }
 }
