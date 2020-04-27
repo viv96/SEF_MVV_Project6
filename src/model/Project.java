@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 
@@ -31,6 +33,6 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return "project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = [" + this.activities + "]";
+        return "model.Project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = " + this.activities + "]";
     }
 }

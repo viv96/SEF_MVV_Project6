@@ -1,3 +1,5 @@
+package model;
+
 public class ContractStaff extends Staff {
     private double rate;
 

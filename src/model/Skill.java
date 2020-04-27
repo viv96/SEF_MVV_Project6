@@ -1,3 +1,5 @@
+package model;
+
 import enumerations.Competency;
 
 public class Skill {
@@ -27,7 +29,7 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill [name = " + this.skillName + ", level = " + this.skillLevel.toString() + "]";
+        return "model.Skill [name = " + this.skillName + ", level = " + this.skillLevel.toString() + "]";
     }
 }
 

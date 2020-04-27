@@ -1,5 +1,10 @@
+package model;
+
 import enumerations.Competency;
 import enumerations.Status;
+import model.Activity;
+import model.User;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -138,6 +143,6 @@ public class Staff extends User {
 
     @Override
     public String toString() {
-        return "Staff [role = " + this.role + ", skill = " + this.skills + "]";
+        return "model.Staff [role = " + this.role + ", skill = " + this.skills + "]";
     }
 }

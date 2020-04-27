@@ -1,3 +1,4 @@
+package model;
 
 import java.util.ArrayList;
 import java.io.ObjectInputStream;
@@ -7,9 +8,7 @@ import java.io.IOException;
 
 public class Deserializer {
 
-    public Deserializer() {
-
-    }
+    public Deserializer() {}
 
     public ArrayList<User> user() {
         ArrayList<User> users = new ArrayList<>();

@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileOutputStream;
@@ -5,9 +7,7 @@ import java.io.ObjectOutputStream;
 
 public class Serializer {
 
-    public Serializer() {
-
-    }
+    public Serializer() {}
 
     public void user(ArrayList<User> user) {
         try {

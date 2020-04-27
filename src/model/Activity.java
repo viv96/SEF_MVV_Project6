@@ -1,3 +1,5 @@
+package model;
+
 import enumerations.Status;
 
 import java.util.ArrayList;
@@ -77,6 +79,6 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate +  ", duration = " + String.valueOf(this.actDuration) + "]";
+        return "model.Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate +  ", duration = " + String.valueOf(this.actDuration) + "]";
     }
 }
