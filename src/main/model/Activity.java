@@ -8,33 +8,46 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Activity {
-    private String actID;
-    private ArrayList<String> actStaff = new ArrayList<String>();
-    private Status actStatus;
-    private Date startDate = new Date();
-    private Date endDate = new Date();
-//    private int actDuration; //to be calculated in hours, progression of each activity is based on the hours worked.
-//    private int actProgressDuration;
+    private static int activityNumID = 0;
+    private String activityID;
+    private String activityName;
+    private String activityDescription;
+    private double estimatedTimeInWeek;
+    private status activityStatus;
+    private enum status {OPEN, IN_PROGRESS, TESTING, DONE};
+    private ArrayList<Skill> listOfSkillsNeeded;
 
-    public Activity(String actID, ArrayList<String> actStaff, Status actStatus, Date startDate, Date endDate) {
-        this.actID = actID;
-        this.actStaff = actStaff;
-        this.actStatus = actStatus;
-        this.startDate = startDate;
-        this.endDate = endDate;
-//        this.actDuration =  (int)( (startDate.getTime() - endDate.getTime())/(1000 * 60 * 60 * 24) );
-//        this.actProgressDuration = 0;
+    //Constructor
+    public Activity(String name, String description, double duration) {
+        this.activityName = name;
+        this.activityDescription = description;
+        this.estimatedTimeInWeek = duration;
+        this.activityStatus = status.OPEN;
+        generateActivityId();
+        activityNumID++;
     }
 
-//    public int getActProgressDuration() {
-//        return actProgressDuration;
-//    }
-//
-//    public void setActProgressDuration(int actProgressDuration) {
-//        this.actProgressDuration = actProgressDuration;
-//    }
+    //getter methods
+    public String getActivityID(){return this.activityID;}
 
-    public Date getStartDate() {
+
+    /*****************************************************************************************
+     * Method name       : generateActivityId()
+     * Method description: This method is called in a constructor and then generates a unique
+     *                     ID for an activity object.
+     * Creator           : Vijit Kumar
+     * Date              : 04/05/2020
+     *****************************************************************************************/
+    public void generateActivityId() {
+        String s1 = "A";
+        String str = String.format("%d", activityNumID);
+        String s = s1+str;
+        this.activityID = s;
+    }
+
+
+    /*
+    public String getStartDate() {
         return startDate;
     }
 
@@ -89,6 +102,7 @@ public class Activity {
         getActStaff().add(staffID);
         return true;
     }
+     */
 
     public void progressCheck(Date date) {
         if (date.compareTo(endDate)>0){
@@ -98,6 +112,6 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "model.Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate;
+        return "activityID: " + this.activityID + ", activityName: " + this.activityName + ", activityDescription: " + this.activityDescription + ", activityStatus: " + this.activityStatus + ", estimatedTime:  " + this.estimatedTimeInWeek + " days";
     }
 }

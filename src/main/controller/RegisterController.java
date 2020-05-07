@@ -7,7 +7,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
 import model.User;
-import model.DataManager;
+import model.Manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class RegisterController {
 
     @FXML
     public void handleSignUp(ActionEvent event) throws IOException {
-        ArrayList<User> users = DataManager.getInstance().getUsers();
+        ArrayList<User> users = Manager.getInstance().getUsers();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
 

@@ -6,7 +6,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
-import model.DataManager;
+import model.Manager;
 import model.User;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class LoginController {
 
     @FXML
     private void handleSignIn(ActionEvent event) throws IOException {
-        ArrayList<User> users = DataManager.getInstance().getUsers();
+        ArrayList<User> users = Manager.getInstance().getUsers();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
 
