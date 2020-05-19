@@ -23,17 +23,18 @@ public class Project implements Serializable {
         generateProjectId();
 
         //Creating a dummy activity and adding it to arraylist.
-        Activity activity = new Activity("sample", "This is a sample activity", 0);
-        listOfActivities = new ArrayList<Activity>();
+        Activity activity = new Activity("sample", "This is a sample activity", 0);// Need to prompt user to enter the activity details.
+        this.listOfActivities = new ArrayList<Activity>();
         listOfActivities.add(activity);
     }
 
     /***************************************************************************************
      * Method name       : generateProjectId()
+     *
+     * Creator           : Vijit Kumar
+     *
      * Method description: This method is called in a constructor and then generates a unique
      *                     ID for an project object.
-     * Creator           : Vijit Kumar
-     * Date              : 04/05/2020
      ***************************************************************************************/
     public void generateProjectId() {
         String s1 = "P";
@@ -42,8 +43,20 @@ public class Project implements Serializable {
         this.projectID = s;
     }
 
+    /***************************************************************************************
+     * Method name       : addActivitiesToProject()
+     * return type       : void
+     * Creator           : Vijit Kumar
+     * Method description: This method adds an activity to the listOfActivites created by
+     *                     the manager.
+     ***************************************************************************************/
+    public void addActivityToProject(Activity activity){
+        listOfActivities.add(activity);
+    }
+
+    /*
     @Override
     public String toString() {
         return "model.Project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = " + this.activities + "]";
-    }
+    }*/
 }

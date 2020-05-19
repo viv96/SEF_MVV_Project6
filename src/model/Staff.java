@@ -15,7 +15,7 @@ public class Staff extends User {
     Scanner scan = new Scanner(System.in);
     
     public Staff(String id, String name, String password, String role) {
-        super(id, name, password);
+        super( name, password);
         this.role = role;
     }
 

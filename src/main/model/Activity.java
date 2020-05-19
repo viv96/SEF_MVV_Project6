@@ -13,6 +13,11 @@ public class Activity {
     private String activityName;
     private String activityDescription;
     private double estimatedTimeInWeek;
+    //private double earlyStart;
+    //private double earlyFinish;
+    //private double lateStart;
+    //private double lateFinish;
+    //private double totalSlack;
     private status activityStatus;
     private enum status {OPEN, IN_PROGRESS, TESTING, DONE};
     private ArrayList<Skill> listOfSkillsNeeded;
