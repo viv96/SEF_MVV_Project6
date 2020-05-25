@@ -13,8 +13,8 @@ public class Activity {
     private Status actStatus;
     private Date startDate = new Date();
     private Date endDate = new Date();
-    private int actDuration; //to be calculated in hours, progression of each activity is based on the hours worked.
-    private int actProgressDuration;
+//    private int actDuration; //to be calculated in hours, progression of each activity is based on the hours worked.
+//    private int actProgressDuration;
 
     public Activity(String actID, ArrayList<String> actStaff, Status actStatus, Date startDate, Date endDate) {
         this.actID = actID;
@@ -22,7 +22,7 @@ public class Activity {
         this.actStatus = actStatus;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.actDuration =  (int)( (startDate.getTime() - endDate.getTime())/(1000 * 60 * 60 * 24) );
+//        this.actDuration =  (int)( (startDate.getTime() - endDate.getTime())/(1000 * 60 * 60 * 24) );
 //        this.actProgressDuration = 0;
     }
 
@@ -50,13 +50,13 @@ public class Activity {
         this.endDate = endDate;
     }
 
-    public int getActDuration() {
-        return actDuration;
-    }
-
-    public void setActDuration(int actDuration) {
-        this.actDuration = actDuration;
-    }
+//    public int getActDuration() {
+//        return actDuration;
+//    }
+//
+//    public void setActDuration(int actDuration) {
+//        this.actDuration = actDuration;
+//    }
 
     public String getActID() {
         return actID;
@@ -98,6 +98,6 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "model.Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate +  ", duration = " + String.valueOf(this.actDuration) + "]";
+        return "model.Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate;
     }
 }

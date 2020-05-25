@@ -1,12 +1,10 @@
 package model;
 
-import java.util.ArrayList;
-
 public class ContractEmployee extends employee {
     private double rate;
 
-    public ContractEmployee(String id, String name, String password, String role, Calendar employeeCalendar, double rate) {
-        super(id, name, password, role, employeeCalendar);
+    public ContractEmployee(String id, String name, String password, String role, Project project, String experienceLevel, enumerations.availability weekAvailability, double rate) {
+        super(id, name, password, role, project,experienceLevel, weekAvailability);
         this.rate = rate;
     }
 

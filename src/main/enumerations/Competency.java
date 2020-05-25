@@ -1,9 +1,5 @@
 package enumerations;
 
 public enum Competency {
-    BEGINNER,
-    NOVICE,
-    INTERMEDIATE,
-    ADVANCED,
-    EXPERT;
+    ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE;
 }

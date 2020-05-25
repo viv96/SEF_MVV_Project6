@@ -2,23 +2,37 @@ package model;
 
 import enumerations.Competency;
 import enumerations.Status;
-import model.Activity;
-import model.User;
-import java.util.ArrayList;
-import java.util.Scanner;
+import enumerations.availability;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.util.*;
 
 public class employee extends User {
     private String role;
-    private ArrayList<Skill> skills = new ArrayList<Skill>();
-    private Calendar employeeCalendar;
-//    private int staffSpot;
+    private String experienceLevel;
+    private HashSet<Skill> skills = new HashSet<Skill>();
+    private ArrayList<LocalDate> occupiedDates;
+    private final ArrayList<ProjCalendar> employeeCalendar;
+    private enumerations.availability weekAvailability;
     Scanner scan = new Scanner(System.in);
     
-    public employee(String id, String name, String password, String role, Calendar employeeCalendar) {
-        super(id, name, password);
+    public employee(String id, String name, String password, String role, Project project, String experienceLevel, enumerations.availability weekAvailability) {
+        super(id, name, password, project);
+        this.experienceLevel = experienceLevel;
         this.role = role;
+        this.occupiedDates = null;
+        this.weekAvailability = weekAvailability;
         this.employeeCalendar = null;
     }
+
+    public ArrayList<LocalDate> getOccupiedDates() {
+        return occupiedDates;
+    }
+
 
     public String getRole() {
         return role;
@@ -28,12 +42,32 @@ public class employee extends User {
         this.role = role;
     }
 
-    public ArrayList<Skill> getSkills() {
+    public HashSet<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(ArrayList<Skill> skills) {
+    public void setSkills(HashSet<Skill> skills) {
         this.skills = skills;
+    }
+
+    public String getExperienceLevel() {
+        return experienceLevel;
+    }
+
+    public void setExperienceLevel(String experienceLevel) {
+        this.experienceLevel = experienceLevel;
+    }
+
+    public void setOccupiedDates(ArrayList<LocalDate> occupiedDates) {
+        this.occupiedDates = occupiedDates;
+    }
+
+    public availability getWeekAvailability() {
+        return weekAvailability;
+    }
+
+    public void setWeekAvailability(availability weekAvailability) {
+        this.weekAvailability = weekAvailability;
     }
 
     public Boolean spotter(ArrayList<String> list, String element){
@@ -45,54 +79,59 @@ public class employee extends User {
         return false;
     }
 
-    public Boolean specifyAvailability(){
+    public void checkAvailability(Project project){
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
+            formatter = formatter.withLocale(Locale.ENGLISH);  // using standard GMT time.
 
-        return true;
+            LocalDate startDate = LocalDate.parse(project.getProjectStartDate(), formatter);
+            LocalDate endDate = LocalDate.parse(project.getProjectEndDate(), formatter);
 
-//        int Y = 2020;    // year
-//        int startDayOfMonth = 5;
-//        int spaces = startDayOfMonth;
+//            int dayDiff1 = Math.abs((int) ChronoUnit.DAYS.between(startDate, endDate));
 //
-//        // months[i] = name of month i
-//        String[] months = {
-//                "",                               // leave empty so that we start with months[1] = "January"
-//                "January", "February", "March",
-//                "April", "May", "June",
-//                "July", "August", "September",
-//                "October", "November", "December"
-//        };
+//            LocalDate firstSunday = startDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+//            LocalDate lastSunday = endDate.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY));
+//            long totalSunday = ChronoUnit.WEEKS.between(firstSunday, lastSunday) + 1;
 //
-//        // days[i] = number of days in month i
-//        int[] days = {
-//                0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-//        };
+//            LocalDate firstSaturday = startDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+//            LocalDate lastSaturday = endDate.with(TemporalAdjusters.previous(DayOfWeek.SATURDAY));
+//            long totalSaturday = ChronoUnit.WEEKS.between(firstSaturday, lastSaturday) + 1;
 //
-//        for (int M = 1; M <= 12; M++) {
+//            int totalHolidays = (int) (totalSaturday + totalSunday);int totalWorkDays;
 //
-//            // check for leap year
-//            if ((((Y % 4 == 0) && (Y % 100 != 0)) || (Y % 400 == 0)) && M == 2)
-//                days[M] = 29;
-//
-//
-//            // print calendar header
-//            // Display the month and year
-//            System.out.println("          " + months[M] + " " + Y);
-//
-//            // Display the lines
-//            System.out.println("_____________________________________");
-//            System.out.println("   Sun  Mon Tue   Wed Thu   Fri  Sat");
-//
-//            spaces = (days[M - 1] + spaces) % 7;
-//
-//            // print the calendar
-//            for (int i = 0; i < spaces; i++)
-//                System.out.print("     ");
-//            for (int i = 1; i <= days[M]; i++) {
-//                System.out.printf(" %3d ", i);
-//                if (((i + spaces) % 7 == 0) || (i == days[M])) System.out.println();
+//            if (occupiedDates.isEmpty()) {
+//                totalWorkDays = dayDiff1 - totalHolidays;
+//            } else {
+//                totalWorkDays = dayDiff1 - totalHolidays - occupiedDates.size();
 //            }
-//            System.out.println();
-//        }
+
+            availability empAvailability;
+            if (project.getProjectDaysPerWeek() == 1){
+                empAvailability = availability.eighty;
+            } else if (project.getProjectDaysPerWeek() == 2){
+                empAvailability = availability.sixty;
+            } else if (project.getProjectDaysPerWeek() == 3){
+                empAvailability = availability.forty;
+            } else if (project.getProjectDaysPerWeek() == 4){
+                empAvailability = availability.twenty;
+            } else {
+                empAvailability = availability.zero;
+            }
+
+            employeeCalendar.add(new ProjCalendar(project.getProjectID(),startDate,endDate,empAvailability));
+
+            for (ProjCalendar projCalendar : employeeCalendar) {
+                System.out.print(projCalendar.toString());
+            }
+
+            System.out.print("Not Available in these dates: ");
+            for (LocalDate localDate: occupiedDates){
+                System.out.println(localDate.format(formatter));
+            }
+            
+        } catch (Exception e){
+            System.out.print("exception have been thrown.");
+        }
     }
 
     public Status updateActivity(Activity act) {
