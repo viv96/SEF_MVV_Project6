@@ -20,8 +20,8 @@ public class employee extends User {
     private enumerations.availability weekAvailability;
     Scanner scan = new Scanner(System.in);
     
-    public employee(String id, String name, String password, String role, Project project, String experienceLevel, enumerations.availability weekAvailability) {
-        super(id, name, password, project);
+    public employee(String id, String name, String password, String role, String experienceLevel, enumerations.availability weekAvailability) {
+        super(id, name, password);
         this.experienceLevel = experienceLevel;
         this.role = role;
         this.occupiedDates = null;
