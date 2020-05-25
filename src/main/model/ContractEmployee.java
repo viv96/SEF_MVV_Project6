@@ -1,10 +1,10 @@
 package model;
 
-public class ContractStaff extends Staff {
+public class ContractEmployee extends employee {
     private double rate;
 
-    public ContractStaff(String id, String name, String password, String role, double rate) {
-        super(id, name, password, role);
+    public ContractEmployee(String id, String name, String password, String role, Project project, String experienceLevel, enumerations.availability weekAvailability, double rate) {
+        super(id, name, password, role, project,experienceLevel, weekAvailability);
         this.rate = rate;
     }
 
