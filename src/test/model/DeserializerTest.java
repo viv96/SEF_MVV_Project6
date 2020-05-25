@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ class DeserializerTest {
     @BeforeEach
     public void setUp() {
         this.users = new ArrayList<User>();
-        this.projects = new
+        this.projects = new ArrayList<Project>();
         this.serializer = new Serializer();
         this.deserializer = new Deserializer();
 
