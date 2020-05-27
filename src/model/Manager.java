@@ -2,7 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-public class Manager extends User{
+public class Manager {
+    private String name;
     private Serializer serialize;
     private Deserializer deserialize;
 
@@ -17,10 +18,9 @@ public class Manager extends User{
     }
 */
     //Constructor
-    public Manager(String name, String password) {
-        super(name,password);
+    public Manager(String name) {
+        this.name = name;
     }
-
 
 /*
     private void getUsersFromDB() {
@@ -49,25 +49,57 @@ public class Manager extends User{
         return this.projects;
     }
 */
-    /**********************************************************************************************************
-     * Method name       : createProject(String projName, String projDescription, String projStartDate)
+    /*******************************************************************************************************************
+     * Method name       : createProject(String , String , String )
      * Return type       : Project
-     * Creator           : Vijit Kumar
+     * Creator           : Vijit Kumar (s3799493)
      * Method description: This method creates a new project.
-     *********************************************************************************************************/
+     ******************************************************************************************************************/
     public Project createProject(String projName, String projDescription, String projStartDate) {
         Project project = new Project(projName, projDescription, projStartDate);
         return project;
     }
 
-    /**********************************************************************************************************
-     * Method name       : createActivity(String actName, String actDescription, double duration)
+    /*******************************************************************************************************************
+     * Method name       : createActivity(Project , String , String , double, ArrayList<String> )
      * Return type       : Activity
-     * Creator           : Vijit Kumar
+     * Creator           : Vijit Kumar (s3799493)
      * Method description: This method creates an activity for the project.
-     *********************************************************************************************************/
-    public Activity createActivity(String actName, String actDescription, double duration) {
-        Activity activity = new Activity(actName, actDescription, duration);
+     ******************************************************************************************************************/
+    public Activity createActivity(Project project,String actName, String actDescription, double duration, ArrayList<Activity> dependencies) {
+        Activity activity = new Activity(actName, actDescription, duration, dependencies);
         return activity;
+    }
+
+    /*******************************************************************************************************************
+     * Method name       : addActivitiesToProject()
+     * return type       : void
+     * Creator           : Vijit Kumar (s3799493)
+     * Method description: This method adds an activity to the listOfActivities which is part of the project class.
+     ******************************************************************************************************************/
+    public void addActivityToProject(Project project, Activity activity){
+        project.updateListOfActivities(activity);
+    }
+
+    /*******************************************************************************************************************
+     * Method name       : viewAllActivitiesInProject(Project )
+     * return type       : void
+     * Creator           : Vijit Kumar (s3799493)
+     * Method description: This method allows the Project manager to view the listOfActivities inside a project.
+     ******************************************************************************************************************/
+    public void viewAllActivitiesInProject(Project project){
+        for(Activity act: project.getListOfActivities()){
+            System.out.println(act.toString());
+        }
+    }
+
+    /*******************************************************************************************************************
+     * Method name       : calculateCriticalPath(Project )
+     * return type       : void
+     * Creator           : Vijit Kumar (s3799493)
+     * Method description: This method allows the Project manager to calculate the critical path of the project.
+     ******************************************************************************************************************/
+    public void calculateCriticalPath(Project project){
+        project.criticalPath();
     }
 }

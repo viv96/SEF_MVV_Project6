@@ -13,46 +13,53 @@ public class Activity {
     private String activityName;
     private String activityDescription;
     private double estimatedTimeInWeek;
-    //private double earlyStart;
-    //private double earlyFinish;
-    //private double lateStart;
-    //private double lateFinish;
-    //private double totalSlack;
+    private ArrayList<Activity> dependencies;
+    private double earlyStart = -1;
+    private double earlyFinish = -1;
+    private double lateStart = -1;
+    private double lateFinish = -1;
+    private double totalSlack = -1;
     private status activityStatus;
+
+
+
+
     private enum status {OPEN, IN_PROGRESS, TESTING, DONE};
     private ArrayList<Skill> listOfSkillsNeeded;
 
     //Constructor
-    public Activity(String name, String description, double duration) {
+    public Activity(String name, String description, double duration, ArrayList<Activity> dependencies) {
         this.activityName = name;
         this.activityDescription = description;
         this.estimatedTimeInWeek = duration;
         this.activityStatus = status.OPEN;
+        this.dependencies = dependencies;
+        if(this.dependencies == null){
+            this.earlyStart = 0;
+            this.earlyFinish = this.earlyStart+this.estimatedTimeInWeek;
+        }
         generateActivityId();
         activityNumID++;
     }
 
-    //getter methods
-    public String getActivityID(){return this.activityID;}
-
-
-    /*****************************************************************************************
-     * Method name       : generateActivityId()
-     * Method description: This method is called in a constructor and then generates a unique
-     *                     ID for an activity object.
-     * Creator           : Vijit Kumar
-     * Date              : 04/05/2020
-     *****************************************************************************************/
-    public void generateActivityId() {
-        String s1 = "A";
-        String str = String.format("%d", activityNumID);
-        String s = s1+str;
-        this.activityID = s;
+    //Getter methods
+    public double getEstimatedTimeInWeek() {
+        return estimatedTimeInWeek;
     }
 
+    public String getActivityID(){
+        return this.activityID;
+    }
 
-    /*
-    public String getStartDate() {
+    public String getActivityName(){
+        return this.activityName;
+    }
+
+    public ArrayList<Activity> getDependencies(){
+        return this.dependencies;
+    }
+
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -75,29 +82,45 @@ public class Activity {
 //    public void setActDuration(int actDuration) {
 //        this.actDuration = actDuration;
 //    }
-
-    public String getActID() {
-        return actID;
+    public double getLateStart() {
+        return lateStart;
     }
 
-    public void setActID(String actID) {
-        this.actID = actID;
+    public double getEarlyStart() {
+        return earlyStart;
     }
 
-    public ArrayList<String> getActStaff() {
-        return actStaff;
+    public double getEarlyFinish() {
+        return earlyFinish;
     }
 
-    public void setActStaff(ArrayList<String> actStaff) {
-        this.actStaff = actStaff;
+    public double getLateFinish() {
+        return lateFinish;
     }
 
-    public Status getActStatus() {
-        return actStatus;
+    public double getTotalSlack() {
+        return totalSlack;
     }
 
-    public void setActStatus(Status actStatus) {
-        this.actStatus = actStatus;
+    //Setter methods
+    public void setEstimatedTimeInWeek(double estimatedTimeInWeek) {
+        this.estimatedTimeInWeek = estimatedTimeInWeek;
+    }
+
+    public void setEarlyStart(double value){
+        this.earlyStart = value;
+    }
+
+    public void setEarlyFinish(double value){
+        this.earlyFinish = value;
+    }
+
+    public void setLateStart(double value) {
+        this.lateStart = value;
+    }
+
+    public void setLateFinish(double value){
+        this.lateFinish = value;
     }
 
     public Boolean assignStaff(String staffID){
@@ -105,9 +128,27 @@ public class Activity {
             return false;
         }
         getActStaff().add(staffID);
+    
         return true;
     }
-     */
+
+    public void setTotalSlack(double value){
+        this.totalSlack = value;
+    }
+
+    /*****************************************************************************************
+     * Method name       : generateActivityId()
+     * Return type       : void
+     * Creator           : Vijit Kumar (s3799493)
+     * Method description: This method is called in a constructor and then generates a unique
+     *                     ID for an activity object.
+     *****************************************************************************************/
+    public void generateActivityId() {
+        String s1 = "A";
+        String str = String.format("%d", activityNumID);
+        String s = s1+str;
+        this.activityID = s;
+    }
 
     public void progressCheck(Date date) {
         if (date.compareTo(endDate)>0){
@@ -117,6 +158,9 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "activityID: " + this.activityID + ", activityName: " + this.activityName + ", activityDescription: " + this.activityDescription + ", activityStatus: " + this.activityStatus + ", estimatedTime:  " + this.estimatedTimeInWeek + " days";
+        return "activityID: " + this.activityID + ", activityName: " + this.activityName +
+                ", activityDuration: " + this.estimatedTimeInWeek +
+                ", earlyStart: " + this.earlyStart + ", earlyFinish: " + this.earlyFinish +
+                ", lateStart: " + this.lateStart + ", lateFinish: " + this.lateFinish;
     }
 }

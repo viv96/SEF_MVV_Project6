@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RegisterController {
+    /*
     @FXML
     private JFXTextField username;
 
@@ -82,4 +83,5 @@ public class RegisterController {
 
         return false;
     }
+    */
 }
