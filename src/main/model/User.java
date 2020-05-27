@@ -34,17 +34,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-<<<<<<< HEAD
-    public User(String id, String name, String password) {
-=======
     public User(String id, String name, String password, String projectID) {
->>>>>>> 50a54ff... changes made in the employee class for project.
         super();
         this.id = id;
         this.name = name;
         this.password = password;
-<<<<<<< HEAD
-=======
         if (projectID==null){
             this.empProjects = null;
         }else {
@@ -54,7 +48,6 @@ public class User implements Serializable {
 
     public ArrayList<String> getEmpProjects() {
         return empProjects;
->>>>>>> 50a54ff... changes made in the employee class for project.
     }
 
     @Override
