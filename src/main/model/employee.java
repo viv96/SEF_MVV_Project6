@@ -19,29 +19,18 @@ public class employee extends User {
     private final ArrayList<ProjCalendar> employeeCalendar;
     private enumerations.availability weekAvailability;
     Scanner scan = new Scanner(System.in);
-<<<<<<< HEAD
-    
-    public employee(String id, String name, String password, String role, String experienceLevel, enumerations.availability weekAvailability) {
-        super(id, name, password);
-=======
 
-    public ArrayList<ProjCalendar> getEmployeeCalendar() {
-        return employeeCalendar;
-    }
-
-<<<<<<< HEAD
-    public employee(String id, String name, String password, String role, Project project, String experienceLevel, enumerations.availability weekAvailability) {
-        super(id, name, password, project);
->>>>>>> dd1f4d7... changes made in the employeeCalendar.
-=======
     public employee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability) {
         super(id, name, password, projectID);
->>>>>>> 50a54ff... changes made in the employee class for project.
         this.experienceLevel = experienceLevel;
         this.role = role;
         this.occupiedDates = null;
         this.weekAvailability = weekAvailability;
         this.employeeCalendar = null;
+    }
+
+    public ArrayList<ProjCalendar> getEmployeeCalendar() {
+        return employeeCalendar;
     }
 
     public ArrayList<LocalDate> getOccupiedDates() {
