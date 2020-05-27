@@ -19,14 +19,18 @@ public class employee extends User {
     private final ArrayList<ProjCalendar> employeeCalendar;
     private enumerations.availability weekAvailability;
     Scanner scan = new Scanner(System.in);
-    
-    public employee(String id, String name, String password, String role, String experienceLevel, enumerations.availability weekAvailability) {
-        super(id, name, password);
+
+    public employee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability) {
+        super(id, name, password, projectID);
         this.experienceLevel = experienceLevel;
         this.role = role;
         this.occupiedDates = null;
         this.weekAvailability = weekAvailability;
         this.employeeCalendar = null;
+    }
+
+    public ArrayList<ProjCalendar> getEmployeeCalendar() {
+        return employeeCalendar;
     }
 
     public ArrayList<LocalDate> getOccupiedDates() {
@@ -71,21 +75,26 @@ public class employee extends User {
     }
 
     public Boolean spotter(ArrayList<String> list, String element){
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == element) {
+        for (String s : list) {
+            if (s.equals(element)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void checkAvailability(Project project){
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
-            formatter = formatter.withLocale(Locale.ENGLISH);  // using standard GMT time.
+    public Boolean checkAvailability(Project project){
+        if (getEmpProjects() == null){
+            assert false;
+            getEmpProjects().add(project.getProjectID());
+            return true;
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
+                formatter = formatter.withLocale(Locale.ENGLISH);  // using standard GMT time.
 
-            LocalDate startDate = LocalDate.parse(project.getProjectStartDate(), formatter);
-            LocalDate endDate = LocalDate.parse(project.getProjectEndDate(), formatter);
+                LocalDate startDate = LocalDate.parse(project.getProjectStartDate(), formatter);
+                LocalDate endDate = LocalDate.parse(project.getProjectEndDate(), formatter);
 
 //            int dayDiff1 = Math.abs((int) ChronoUnit.DAYS.between(startDate, endDate));
 //
@@ -105,33 +114,35 @@ public class employee extends User {
 //                totalWorkDays = dayDiff1 - totalHolidays - occupiedDates.size();
 //            }
 
-            availability empAvailability;
-            if (project.getProjectDaysPerWeek() == 1){
-                empAvailability = availability.eighty;
-            } else if (project.getProjectDaysPerWeek() == 2){
-                empAvailability = availability.sixty;
-            } else if (project.getProjectDaysPerWeek() == 3){
-                empAvailability = availability.forty;
-            } else if (project.getProjectDaysPerWeek() == 4){
-                empAvailability = availability.twenty;
-            } else {
-                empAvailability = availability.zero;
-            }
+                availability empAvailability;
+                if (project.getProjectDaysPerWeek() == 1) {
+                    empAvailability = availability.eighty;
+                } else if (project.getProjectDaysPerWeek() == 2) {
+                    empAvailability = availability.sixty;
+                } else if (project.getProjectDaysPerWeek() == 3) {
+                    empAvailability = availability.forty;
+                } else if (project.getProjectDaysPerWeek() == 4) {
+                    empAvailability = availability.twenty;
+                } else {
+                    empAvailability = availability.zero;
+                }
 
-            employeeCalendar.add(new ProjCalendar(project.getProjectID(),startDate,endDate,empAvailability));
-
-            for (ProjCalendar projCalendar : employeeCalendar) {
-                System.out.print(projCalendar.toString());
+                if (employeeCalendar.size() == 0) {
+                    employeeCalendar.add(new ProjCalendar(project.getProjectID(), startDate, endDate, empAvailability));
+                } else {
+                    for (ProjCalendar projCalendar : employeeCalendar) {
+                        System.out.print(projCalendar.toString());
+                    }
+                    System.out.print("Not Available in these dates: ");
+                    for (LocalDate localDate : occupiedDates) {
+                        System.out.println(localDate.format(formatter));
+                    }
+                }
+            } catch (Exception e) {
+                System.out.print("exception have been thrown.");
             }
-
-            System.out.print("Not Available in these dates: ");
-            for (LocalDate localDate: occupiedDates){
-                System.out.println(localDate.format(formatter));
-            }
-            
-        } catch (Exception e){
-            System.out.print("exception have been thrown.");
         }
+        return true;
     }
 
     public Status updateActivity(Activity act) {

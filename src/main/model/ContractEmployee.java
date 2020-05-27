@@ -3,8 +3,8 @@ package model;
 public class ContractEmployee extends employee {
     private double rate;
 
-    public ContractEmployee(String id, String name, String password, String role, String experienceLevel, enumerations.availability weekAvailability, double rate) {
-        super(id, name, password, role, experienceLevel, weekAvailability);
+    public ContractEmployee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability, double rate) {
+        super(id, name, password, role, projectID, experienceLevel, weekAvailability);
         this.rate = rate;
     }
 
