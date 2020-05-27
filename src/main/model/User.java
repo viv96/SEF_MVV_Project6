@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User implements Serializable {
     private String id;
     private String name;
     private String password;
+    private ArrayList<String> empProjects = new ArrayList<String>();
 
     public String getId() {
         return id;
@@ -32,11 +34,27 @@ public class User implements Serializable {
         this.password = password;
     }
 
+<<<<<<< HEAD
     public User(String id, String name, String password) {
+=======
+    public User(String id, String name, String password, String projectID) {
+>>>>>>> 50a54ff... changes made in the employee class for project.
         super();
         this.id = id;
         this.name = name;
         this.password = password;
+<<<<<<< HEAD
+=======
+        if (projectID==null){
+            this.empProjects = null;
+        }else {
+            this.empProjects.add(projectID);
+        }
+    }
+
+    public ArrayList<String> getEmpProjects() {
+        return empProjects;
+>>>>>>> 50a54ff... changes made in the employee class for project.
     }
 
     @Override
