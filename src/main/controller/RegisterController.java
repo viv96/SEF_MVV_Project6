@@ -41,7 +41,7 @@ public class RegisterController {
     public void handleSignUp(ActionEvent event) throws IOException {
         ArrayList<User> users = DataManager.getInstance().getUsers();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project.fxml"));
 
         Parent register = loader.load();
 
@@ -66,9 +66,8 @@ public class RegisterController {
             DataManager.getInstance().addUsersToDB(newUser);
             window.setScene(scene);
 
-            DashboardController dashboardController = loader.<DashboardController>getController();
-            dashboardController.setUsername(username.getText());
-            
+            ProjectController projectController = loader.<ProjectController>getController();
+
             window.show();
         }
     }

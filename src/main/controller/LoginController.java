@@ -26,7 +26,7 @@ public class LoginController {
     private void handleSignIn(ActionEvent event) throws IOException {
         ArrayList<User> users = DataManager.getInstance().getUsers();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project.fxml"));
 
         Parent register = loader.load();
 
@@ -39,8 +39,7 @@ public class LoginController {
             if (user.getName().equals(username.getText()) && user.getPassword().equals(password.getText())) {
                 window.setScene(scene);
 
-                DashboardController dashboardController = loader.<DashboardController>getController();
-                dashboardController.setUsername(username.getText());
+                ProjectController projectController = loader.<ProjectController>getController();
 
                 window.show();
             }
