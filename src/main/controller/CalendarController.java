@@ -3,36 +3,28 @@ package controller;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import model.DataManager;
-import model.User;
+import model.*;
 
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
     @FXML
-    private Label usernameLabel;
-
-    @FXML
     private CalendarView calendarView;
-
-    private String username;
 
     private ArrayList<User> users;
     private ArrayList<Calendar> calendars = new ArrayList<Calendar>();
-
-    public void setUsername(String username) {
-        usernameLabel.setText("Hi " + username);
-        this.username = username;
-    }
 
     public CalendarController() {}
 
@@ -40,14 +32,13 @@ public class CalendarController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.users = DataManager.getInstance().getUsers();
         this.addCalendars();
+        this.addEntry();
         this.setCalendarsUpdateTime();
     }
 
     public void addCalendars() {
-        System.out.print(users);
         for (User user :  users) {
             calendars.add(new Calendar(user.getName()));
-
         }
         CalendarSource calendarSource = new CalendarSource("Employee");
 
@@ -58,6 +49,30 @@ public class CalendarController implements Initializable {
 
         //Change Default to Employee
         this.calendarView.getCalendarSources().set(0, calendarSource);
+    }
+
+    public void addEntry() {
+
+        for (User user : users) {
+            if (user instanceof Employee) {
+                Employee employee = (Employee) user;
+                //employee.setCalendar();
+                for (Calendar calendar : this.calendars) {
+                    // Get correct employee calendar
+                    if (calendar.getName().equals(employee.getName())) {
+                        for (EmployeeCalendar employeeCalendar : employee.getCalendar()) {
+                            System.out.print(employeeCalendar.getActivityName());
+                            Entry<String> entry = new Entry<>(employeeCalendar.getActivityName());
+                            entry.changeStartDate(employeeCalendar.getAvailStartDate());
+                            entry.changeEndDate(employeeCalendar.getAvailEndDate());
+                            //entry.setFullDay(true);
+                            calendar.addEntry(entry);
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
     //Update Calendar Time every 10 secondes

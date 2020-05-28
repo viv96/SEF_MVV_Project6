@@ -15,8 +15,7 @@ public class Project implements Serializable {
     private String projectDescription;
     private LocalDate projectStartDate;
     private LocalDate projectEndDate;
-    private pstatus projectStatus;
-    private enum pstatus {OPEN, ASSIGNED, COMPLETED}; //Still need to think about the types of status we need
+    private Status projectStatus;
     private ArrayList<Activity> listOfActivities = new ArrayList<Activity>();
 
     public Project(String projectID, String projectName, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
@@ -27,22 +26,13 @@ public class Project implements Serializable {
         this.listOfActivities = activities;
         this.projectStartDate = projectStartDate;
         this.projectEndDate = projectEndDate;
+        projectNumID++;
+        generateProjectId();
     }
 
     //Getter method List of Activities
     public ArrayList<Activity> getListOfActivities() {
         return listOfActivities;
-    }
-
-    //Constructor for initializing the Project
-    public Project(String name, String description, LocalDate startDate, LocalDate endDate){
-        this.projectName = name;
-        this.projectDescription = description;
-        this.projectStartDate = startDate;
-        this.projectEndDate = endDate;
-        this.projectStatus = pstatus.OPEN;
-        projectNumID++;
-        generateProjectId();
     }
 
     public LocalDate getProjectStartDate() {

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User implements Serializable {
@@ -35,14 +36,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public ArrayList<String> getProjectsID() {
+        return empProjects;
+    }
+
+    public void setProjectsID(String projectsID) {
+        this.empProjects.add(projectsID);
+    }
+
     public User(String id, String name, String password, String projectID) {
         super();
         this.id = id;
         this.name = name;
         this.password = password;
-        if (projectID==null){
-            this.empProjects = null;
-        }else {
+        if (projectID != null) {
             this.empProjects.add(projectID);
         }
     }
@@ -50,7 +57,6 @@ public class User implements Serializable {
     public ArrayList<String> getEmpProjects() {
         return empProjects;
     }
-
 
     @Override
     public boolean equals(Object o) {

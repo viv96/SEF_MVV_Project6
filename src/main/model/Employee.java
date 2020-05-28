@@ -1,70 +1,38 @@
 package model;
 
 import enumerations.Competency;
-import enumerations.Status;
 import enumerations.availability;
 
-import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 public class Employee extends User {
-    private String role;
-    private String experienceLevel;
-    private HashSet<Skill> skills = new HashSet<Skill>();
-    private ArrayList<LocalDate> occupiedDates;
-    private final ArrayList<ProjCalendar> employeeCalendar;
+    private ArrayList<Skill> skills = new ArrayList<Skill>();
+    private final ArrayList<EmployeeCalendar> employeeCalendar = new ArrayList<EmployeeCalendar>();
     private enumerations.availability weekAvailability;
     //Scanner scan = new Scanner(System.in);
 
-    public Employee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability) {
+    public Employee(String id, String name, String password, ArrayList<Skill> skills, String projectID, enumerations.availability weekAvailability) {
         super(id, name, password, projectID);
-        this.experienceLevel = experienceLevel;
-        this.role = role;
-        this.occupiedDates = null;
+        this.skills = skills;
         this.weekAvailability = weekAvailability;
-        this.employeeCalendar = null;
     }
 
-    public ArrayList<ProjCalendar> getEmployeeCalendar() {
+    public Employee(String id, String name, String password) {
+        super(id, name, password, null);
+        this.weekAvailability = null;
+    }
+
+    public ArrayList<EmployeeCalendar> getEmployeeCalendar() {
         return employeeCalendar;
     }
 
-    public ArrayList<LocalDate> getOccupiedDates() {
-        return occupiedDates;
-    }
-
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public HashSet<Skill> getSkills() {
+    public ArrayList<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(HashSet<Skill> skills) {
+    public void setSkills(ArrayList<Skill> skills) {
         this.skills = skills;
-    }
-
-    public String getExperienceLevel() {
-        return experienceLevel;
-    }
-
-    public void setExperienceLevel(String experienceLevel) {
-        this.experienceLevel = experienceLevel;
-    }
-
-    public void setOccupiedDates(ArrayList<LocalDate> occupiedDates) {
-        this.occupiedDates = occupiedDates;
     }
 
     public availability getWeekAvailability() {
@@ -84,66 +52,46 @@ public class Employee extends User {
         return false;
     }
 
-    public Boolean checkAvailability(Project project){
-        if (getEmpProjects() == null){
-            assert false;
-            getEmpProjects().add(project.getProjectID());
-            return true;
-        } else {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
-                formatter = formatter.withLocale(Locale.ENGLISH);  // using standard GMT time.
+    public void setCalendar() {
+        ArrayList<Project> projects = new ArrayList<Project>();
 
-                LocalDate startDate = project.getProjectStartDate();
-                LocalDate endDate = project.getProjectEndDate();
+        projects = DataManager.getInstance().getProjects();
+        for (Project project : projects) {
 
-//            int dayDiff1 = Math.abs((int) ChronoUnit.DAYS.between(startDate, endDate));
-//
-//            LocalDate firstSunday = startDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
-//            LocalDate lastSunday = endDate.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY));
-//            long totalSunday = ChronoUnit.WEEKS.between(firstSunday, lastSunday) + 1;
-//
-//            LocalDate firstSaturday = startDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
-//            LocalDate lastSaturday = endDate.with(TemporalAdjusters.previous(DayOfWeek.SATURDAY));
-//            long totalSaturday = ChronoUnit.WEEKS.between(firstSaturday, lastSaturday) + 1;
-//
-//            int totalHolidays = (int) (totalSaturday + totalSunday);int totalWorkDays;
-//
-//            if (occupiedDates.isEmpty()) {
-//                totalWorkDays = dayDiff1 - totalHolidays;
-//            } else {
-//                totalWorkDays = dayDiff1 - totalHolidays - occupiedDates.size();
-//            }
-
-                availability empAvailability;
-                if (project.getProjectDaysPerWeek() == 1) {
-                    empAvailability = availability.eighty;
-                } else if (project.getProjectDaysPerWeek() == 2) {
-                    empAvailability = availability.sixty;
-                } else if (project.getProjectDaysPerWeek() == 3) {
-                    empAvailability = availability.forty;
-                } else if (project.getProjectDaysPerWeek() == 4) {
-                    empAvailability = availability.twenty;
-                } else {
-                    empAvailability = availability.zero;
-                }
-
-                if (employeeCalendar.size() == 0) {
-                    employeeCalendar.add(new ProjCalendar(project.getProjectID(), startDate, endDate, empAvailability));
-                } else {
-                    for (ProjCalendar projCalendar : employeeCalendar) {
-                        System.out.print(projCalendar.toString());
-                    }
-                    System.out.print("Not Available in these dates: ");
-                    for (LocalDate localDate : occupiedDates) {
-                        System.out.println(localDate.format(formatter));
+            System.out.println(project.getProjectID());
+            System.out.println(this.getProjectsID());
+            for (String projectID : this.getProjectsID()) {
+            // Verify he is assigned to this project
+            if (project.getProjectID().equals(projectID)) {
+                // Get all activity associated to this project
+                for (Activity activity : project.getActivities()) {
+                    System.out.println(activity.getStaffs_id());
+                    System.out.println(this.getId());
+                    // Verify he is assigned to that activity
+                    for (String staffId : activity.getStaffs_id()) {
+                        if (staffId.equals(this.getId())) {
+                            // Verify if he as atleast one skill and his competency is equal or higher
+                            for (Skill activitySkill : activity.getSkillRequired()) {
+                                for (Skill userSkill : this.getSkills()) {
+                                    System.out.println(userSkill.getSkillName());
+                                    System.out.println(userSkill.getSkillLevel().toString());
+                                    if (activitySkill.getSkillName().equals(userSkill.getSkillName()) && activitySkill.getSkillLevel().ordinal() <= userSkill.getSkillLevel().ordinal()) {
+                                        this.employeeCalendar.add(new EmployeeCalendar(activity.getId(), activity.getName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
+                                        System.out.print("Everything good, he can be associated to that activity");
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            } catch (Exception e) {
-                System.out.print("exception have been thrown.");
+            }
             }
         }
-        return true;
+        DataManager.getInstance().addUsersToDB(this);
+    }
+
+    public ArrayList<EmployeeCalendar> getCalendar() {
+        return this.employeeCalendar;
     }
 
     /*public Status updateActivity(Activity act) {
@@ -194,6 +142,6 @@ public class Employee extends User {
 
     @Override
     public String toString() {
-        return "model.employee [role = " + this.role + ", skill = " + this.skills + "]";
+        return "model.employee [id = " + this.getId() + ", skill = " + this.skills + ", calendar = " + this.employeeCalendar + "]";
     }
 }

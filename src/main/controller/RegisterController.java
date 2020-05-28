@@ -63,7 +63,7 @@ public class RegisterController {
 
     private void createUserAndSwitchScene(int id, FXMLLoader loader, Scene scene, Stage window) {
         if (password.getText().equals(confirmPassword.getText())) {
-            Employee newEmployee = new Employee(Integer.toString(id), username.getText(), password.getText(), null, null, null, null);
+            Employee newEmployee = new Employee(Integer.toString(id), username.getText(), password.getText());
             DataManager.getInstance().addUsersToDB(newEmployee);
             window.setScene(scene);
 

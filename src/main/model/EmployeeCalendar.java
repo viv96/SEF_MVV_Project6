@@ -8,25 +8,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProjCalendar implements Serializable {
-    private String projectID;
+public class EmployeeCalendar implements Serializable {
+    private String activityId;
+    private String activityName;
     private LocalDate availStartDate;
     private LocalDate availEndDate;
     private enumerations.availability availability;
 
-    public ProjCalendar(String projectID, LocalDate availStartDate, LocalDate availEndDate, enumerations.availability availability) {
-        this.projectID = projectID;
+    public EmployeeCalendar(String activityId, String activityName, LocalDate availStartDate, LocalDate availEndDate, enumerations.availability availability) {
+        this.activityId = activityId;
+        this.activityName = activityName;
         this.availStartDate = availStartDate;
         this.availEndDate = availEndDate;
         this.availability = availability;
     }
 
-    public String getProjectID() {
-        return projectID;
+    public String getId() {
+        return activityId;
     }
 
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public void setId(String id) {
+        this.activityId = id;
+    }
+
+    public String getActivityName() {
+        return this.activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public LocalDate getAvailStartDate() {
@@ -67,7 +77,7 @@ public class ProjCalendar implements Serializable {
         } else {
             avail = "0%";
         }
-        return "Project ID: "+projectID+"Start Date: "+getAvailEndDate().format(formatter)+"End Date: "+getAvailEndDate().format(formatter)+"Availability: "+avail ;
+        return "Project ID: "+ activityId + "Start Date: " + getAvailEndDate().format(formatter) + "End Date: " + getAvailEndDate().format(formatter) + "Availability: " + avail ;
     }
 //    public void getDay(String year, String month, String day){
 //

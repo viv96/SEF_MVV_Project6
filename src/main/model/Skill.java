@@ -2,7 +2,9 @@ package model;
 
 import enumerations.Competency;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
     private String skillName;
     private Competency skillLevel;
 
