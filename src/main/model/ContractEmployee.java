@@ -1,6 +1,6 @@
 package model;
 
-public class ContractEmployee extends employee {
+public class ContractEmployee extends Employee {
     private double rate;
 
     public ContractEmployee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability, double rate) {

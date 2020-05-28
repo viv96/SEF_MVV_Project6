@@ -4,6 +4,7 @@ import enumerations.Competency;
 import enumerations.Status;
 import enumerations.availability;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,16 +12,16 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
-public class employee extends User {
+public class Employee extends User {
     private String role;
     private String experienceLevel;
     private HashSet<Skill> skills = new HashSet<Skill>();
     private ArrayList<LocalDate> occupiedDates;
     private final ArrayList<ProjCalendar> employeeCalendar;
     private enumerations.availability weekAvailability;
-    Scanner scan = new Scanner(System.in);
+    //Scanner scan = new Scanner(System.in);
 
-    public employee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability) {
+    public Employee(String id, String name, String password, String role, String projectID, String experienceLevel, enumerations.availability weekAvailability) {
         super(id, name, password, projectID);
         this.experienceLevel = experienceLevel;
         this.role = role;
@@ -93,8 +94,8 @@ public class employee extends User {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
                 formatter = formatter.withLocale(Locale.ENGLISH);  // using standard GMT time.
 
-                LocalDate startDate = LocalDate.parse(project.getProjectStartDate(), formatter);
-                LocalDate endDate = LocalDate.parse(project.getProjectEndDate(), formatter);
+                LocalDate startDate = project.getProjectStartDate();
+                LocalDate endDate = project.getProjectEndDate();
 
 //            int dayDiff1 = Math.abs((int) ChronoUnit.DAYS.between(startDate, endDate));
 //
@@ -145,7 +146,7 @@ public class employee extends User {
         return true;
     }
 
-    public Status updateActivity(Activity act) {
+    /*public Status updateActivity(Activity act) {
         if (spotter(act.getActStaff(),getId())) {
             int chooseStatus;
             scan = new Scanner(System.in);
@@ -172,7 +173,7 @@ public class employee extends User {
             }
         }
         return Status.NO_ACCESS;
-    }
+    }*/
 
     public Boolean updateSkill(String skillName, Competency level){
         Skill newSkill = new Skill(skillName,level);

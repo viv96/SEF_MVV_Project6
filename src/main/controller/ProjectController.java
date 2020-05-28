@@ -4,6 +4,5 @@ import javafx.fxml.FXML;
 
 public class ProjectController {
 
-    public ProjectController()
-    {}
+    public ProjectController() {}
 }

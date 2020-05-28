@@ -1,19 +1,21 @@
 package model;
 
 import enumerations.Status;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Activity {
+public class Activity implements Serializable {
     private static int activityNumID = 0;
     private String activityID;
     private String activityName;
     private String activityDescription;
+    private ArrayList<String> actStaff = new ArrayList<String>();
     private double estimatedTimeInWeek;
-    private ArrayList<String> staffs;
     private ArrayList<Activity> dependencies;
     private LocalDate startDate;
     private LocalDate endDate;

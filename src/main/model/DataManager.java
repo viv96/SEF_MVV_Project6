@@ -1,12 +1,12 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class DataManager {
     private Serializer serialize;
     private Deserializer deserialize;
-    private ArrayList<User> users;
-    private ArrayList<Project> projects;
+    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<Project> projects = new ArrayList<Project>();
 
     public static DataManager getInstance() {
         DataManager manager = new DataManager();
@@ -22,11 +22,27 @@ public class DataManager {
     private DataManager() {}
 
     private void getUsersFromDB() {
-        this.users = this.deserialize.user();
+        ArrayList<User> users = new ArrayList<User>();
+
+        // Remove duplicate
+        users = this.deserialize.user();
+        for (User user : users) {
+            if (!(this.users.contains(user))) {
+                this.users.add(user);
+            }
+        }
     }
 
     private void getProjectFromDB() {
-        this.projects = this.deserialize.project();
+        ArrayList<Project> projects = new ArrayList<Project>();
+
+        // Remove duplicate
+        projects = this.deserialize.project();
+        for (Project project : projects) {
+            if (!(this.projects.contains(project))) {
+                this.projects.add(project);
+            }
+        }
     }
 
     public void addUsersToDB(User user) {

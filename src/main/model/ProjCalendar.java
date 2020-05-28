@@ -2,12 +2,13 @@ package model;
 
 import enumerations.availability;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProjCalendar {
+public class ProjCalendar implements Serializable {
     private String projectID;
     private LocalDate availStartDate;
     private LocalDate availEndDate;

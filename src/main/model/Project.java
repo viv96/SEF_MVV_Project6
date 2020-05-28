@@ -1,7 +1,11 @@
 package model;
 
 import java.util.*;
+import enumerations.Status;
+import enumerations.availability;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Project implements Serializable {
@@ -14,6 +18,16 @@ public class Project implements Serializable {
     private pstatus projectStatus;
     private enum pstatus {OPEN, ASSIGNED, COMPLETED}; //Still need to think about the types of status we need
     private ArrayList<Activity> listOfActivities = new ArrayList<Activity>();
+
+    public Project(String projectID, String projectName, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
+        super();
+        this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectStatus = status;
+        this.listOfActivities = activities;
+        this.projectStartDate = projectStartDate;
+        this.projectEndDate = projectEndDate;
+    }
 
     //Getter method List of Activities
     public ArrayList<Activity> getListOfActivities() {
@@ -29,6 +43,22 @@ public class Project implements Serializable {
         this.projectStatus = pstatus.OPEN;
         projectNumID++;
         generateProjectId();
+    }
+
+    public LocalDate getProjectStartDate() {
+        return projectStartDate;
+    }
+
+    public void setProjectStartDate(LocalDate projectStartDate) {
+        this.projectStartDate = projectStartDate;
+    }
+
+    public LocalDate getProjectEndDate() {
+        return projectEndDate;
+    }
+
+    public void setProjectEndDate(LocalDate projectEndDate) {
+        this.projectEndDate = projectEndDate;
     }
 
     /*******************************************************************************************************************
@@ -265,9 +295,26 @@ public class Project implements Serializable {
         return indexOfLastActivites;
     }
 
-    /*
+    public Status getProjectStatus() {
+        return this.projectStatus;
+    }
+
+    public void setProjectStatus(Status projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+
+        Project project = (Project) o;
+
+        return !(projectID != null ? !projectID.equals(project.projectID) : project.projectID != null);
+    }
+
     @Override
     public String toString() {
-        return "model.Project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = " + this.activities + "]";
-    }*/
+        return "model.Project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = " + this.listOfActivities + "]";
+    }
 }
