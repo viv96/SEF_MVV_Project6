@@ -20,10 +20,6 @@ public class Activity {
     private double lateFinish = -1;
     private double totalSlack = -1;
     private status activityStatus;
-
-
-
-
     private enum status {OPEN, IN_PROGRESS, TESTING, DONE};
     private ArrayList<Skill> listOfSkillsNeeded;
 
@@ -161,6 +157,7 @@ public class Activity {
         return "activityID: " + this.activityID + ", activityName: " + this.activityName +
                 ", activityDuration: " + this.estimatedTimeInWeek +
                 ", earlyStart: " + this.earlyStart + ", earlyFinish: " + this.earlyFinish +
-                ", lateStart: " + this.lateStart + ", lateFinish: " + this.lateFinish;
+                ", lateStart: " + this.lateStart + ", lateFinish: " + this.lateFinish +
+                ", totalSlack: " + this.totalSlack;
     }
 }

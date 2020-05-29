@@ -88,8 +88,8 @@ public class Project implements Serializable {
             listOfActivities.get(indexOfLastActivities.get(index3)).setLateStart(tempLargestEarlyFinish-tempEstimatedTime);
 
             //Updating total slack value
-            double tempLateFinish = listOfActivities.get(index3).getLateFinish();
-            double tempEarlyFinish = listOfActivities.get(index3).getEarlyFinish();
+            double tempLateFinish = listOfActivities.get(indexOfLastActivities.get(index3)).getLateFinish();
+            double tempEarlyFinish = listOfActivities.get(indexOfLastActivities.get(index3)).getEarlyFinish();
             listOfActivities.get(indexOfLastActivities.get(index3)).setTotalSlack(tempLateFinish-tempEarlyFinish);
         }
 

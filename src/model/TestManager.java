@@ -10,7 +10,7 @@ public class TestManager {
         File file1 = new File("testcases/activities1.txt");
 
         //Manager creates a new project
-        Manager manager1 = new Manager("BHENCHOD");
+        Manager manager1 = new Manager("Vijit Kumar");
         Project p1 = manager1.createProject("Project 1", "This is my first project", "26/05/2020");
 
         ArrayList<String> activityNames = new ArrayList<>();
@@ -61,48 +61,11 @@ public class TestManager {
             }
         }
 
-        //manager1.viewAllActivitiesInProject(p1);
+        manager1.viewAllActivitiesInProject(p1);
         System.out.println();
+        System.out.println("After Calculating critical path");
         System.out.println();
         manager1.calculateCriticalPath(p1);
         manager1.viewAllActivitiesInProject(p1);
-
-        /*
-        System.out.println("dependencyIndex: 2 and dependencySize: "+ +p1.getListOfActivities().get(2).getDependencies().size());
-        System.out.println("dependencyIndex: 3 and dependencySize: "+ +p1.getListOfActivities().get(3).getDependencies().size());
-        System.out.println("dependencyIndex: 4 and dependencySize: "+ +p1.getListOfActivities().get(4).getDependencies().size());
-        System.out.println("dependencyIndex: 5 and dependencySize: "+ +p1.getListOfActivities().get(5).getDependencies().size());
-        System.out.println("dependencyIndex: 6 and dependencySize: "+ +p1.getListOfActivities().get(6).getDependencies().size());
-        System.out.println("dependencyIndex: 7 and dependencySize: "+ +p1.getListOfActivities().get(7).getDependencies().size());
-        System.out.println("dependencyIndex: 8 and dependencySize: "+ +p1.getListOfActivities().get(8).getDependencies().size());
-        */
-        //System.out.println(activityNames);
-        //System.out.println(activityDesc);
-        //System.out.println(activityDuration);
-        //System.out.println(activityDependency);
-
-       /*
-        manager1.viewAllActivitiesInProject(p1);
-        System.out.print("Enter number of dependencies: ");
-        int numberOfDependencies = scan.nextInt();
-        scan.nextLine();
-
-        if(numberOfDependencies == 0){
-            manager1.createActivity(p1,"Build AI","This will create an AI app",5, null);
-        } else {
-            ArrayList<Activity> dependency = new ArrayList<>();
-            for(int i=0; i<numberOfDependencies; i++){
-                String addThisActivityID = scan.nextLine();
-                for(int index=0; i<p1.getListOfActivities().size(); i++){
-                    if(p1.getListOfActivities().get(index).getActivityID().equalsIgnoreCase(addThisActivityID)){
-                        Activity dependentActivity = p1.getListOfActivities().get(index);
-                        dependency.add(dependentActivity);
-                        break;
-                    }
-                }
-            }
-            Activity activityTemp =  manager1.createActivity(p1,"Terminate printer","This will terminate the printers in the room",4,dependency);
-            manager1.addActivityToProject(p1,activityTemp);
-        }*/
     }
 }
