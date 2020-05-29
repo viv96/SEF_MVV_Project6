@@ -13,14 +13,16 @@ public class Activity {
     private String activityName;
     private String activityDescription;
     private double estimatedTimeInWeek;
+    private ArrayList<String> staffs;
     private ArrayList<Activity> dependencies;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private double earlyStart = -1;
     private double earlyFinish = -1;
     private double lateStart = -1;
     private double lateFinish = -1;
     private double totalSlack = -1;
-    private status activityStatus;
-    private enum status {OPEN, IN_PROGRESS, TESTING, DONE};
+    private Status activityStatus;
     private ArrayList<Skill> listOfSkillsNeeded;
 
     //Constructor
@@ -28,7 +30,7 @@ public class Activity {
         this.activityName = name;
         this.activityDescription = description;
         this.estimatedTimeInWeek = duration;
-        this.activityStatus = status.OPEN;
+        this.activityStatus = Status.OPEN;
         this.dependencies = dependencies;
         if(this.dependencies == null){
             this.earlyStart = 0;
@@ -55,29 +57,6 @@ public class Activity {
         return this.dependencies;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-//    public int getActDuration() {
-//        return actDuration;
-//    }
-//
-//    public void setActDuration(int actDuration) {
-//        this.actDuration = actDuration;
-//    }
     public double getLateStart() {
         return lateStart;
     }
@@ -119,6 +98,14 @@ public class Activity {
         this.lateFinish = value;
     }
 
+    public ArrayList<String> getActStaff() {
+        return this.staffs;
+    }
+
+    public void setActStatus(Status activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     public Boolean assignStaff(String staffID){
         if (getActStaff().contains(staffID)){
             return false;
@@ -146,8 +133,8 @@ public class Activity {
         this.activityID = s;
     }
 
-    public void progressCheck(Date date) {
-        if (date.compareTo(endDate)>0){
+    public void progressCheck(LocalDate date) {
+        if (date.compareTo(this.endDate) > 0) {
             setActStatus(Status.OVER_DUE);
         }
     }

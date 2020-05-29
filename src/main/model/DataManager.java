@@ -2,14 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
-public class Manager {
+public class DataManager {
     private Serializer serialize;
     private Deserializer deserialize;
     private ArrayList<User> users;
     private ArrayList<Project> projects;
 
-    public static Manager getInstance() {
-        Manager manager = new Manager();
+    public static DataManager getInstance() {
+        DataManager manager = new DataManager();
 
         manager.serialize = new Serializer();
         manager.deserialize = new Deserializer();
@@ -19,7 +19,7 @@ public class Manager {
         return manager;
     }
 
-    private Manager() {}
+    private DataManager() {}
 
     private void getUsersFromDB() {
         this.users = this.deserialize.user();
