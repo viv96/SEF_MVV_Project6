@@ -57,27 +57,19 @@ public class Employee extends User {
 
         projects = DataManager.getInstance().getProjects();
         for (Project project : projects) {
-
-            System.out.println(project.getProjectID());
-            System.out.println(this.getProjectsID());
             for (String projectID : this.getProjectsID()) {
             // Verify he is assigned to this project
             if (project.getProjectID().equals(projectID)) {
                 // Get all activity associated to this project
                 for (Activity activity : project.getActivities()) {
-                    System.out.println(activity.getStaffs_id());
-                    System.out.println(this.getId());
                     // Verify he is assigned to that activity
                     for (String staffId : activity.getStaffs_id()) {
                         if (staffId.equals(this.getId())) {
                             // Verify if he as atleast one skill and his competency is equal or higher
                             for (Skill activitySkill : activity.getSkillRequired()) {
                                 for (Skill userSkill : this.getSkills()) {
-                                    System.out.println(userSkill.getSkillName());
-                                    System.out.println(userSkill.getSkillLevel().toString());
                                     if (activitySkill.getSkillName().equals(userSkill.getSkillName()) && activitySkill.getSkillLevel().ordinal() <= userSkill.getSkillLevel().ordinal()) {
                                         this.employeeCalendar.add(new EmployeeCalendar(activity.getId(), activity.getName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
-                                        System.out.print("Everything good, he can be associated to that activity");
                                     }
                                 }
                             }
