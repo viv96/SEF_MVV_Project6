@@ -2,13 +2,14 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class User implements Serializable {
     private String id;
     private String name;
     private String password;
     private ArrayList<String> empProjects = new ArrayList<String>();
+    private ArrayList<Project> involvedInProjects;
+    private ArrayList<Skill> listOfSkills;
 
     public String getId() {
         return id;
@@ -50,8 +51,9 @@ public class User implements Serializable {
         return empProjects;
     }
 
+
     @Override
-    public String toString() {
+    public String toString(){
         return "user [id = " + this.id + ", name = " + this.name + ", password = " + this.password + "]";
     }
 }

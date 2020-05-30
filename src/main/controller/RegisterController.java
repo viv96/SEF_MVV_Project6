@@ -6,8 +6,8 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
-import model.User;
 import model.DataManager;
+import model.User;
 
 import java.io.IOException;
 import java.util.ArrayList;

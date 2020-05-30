@@ -8,78 +8,102 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Activity {
-    private String actID;
-    private ArrayList<String> actStaff = new ArrayList<String>();
-    private Status actStatus;
-    private Date startDate = new Date();
-    private Date endDate = new Date();
-//    private int actDuration; //to be calculated in hours, progression of each activity is based on the hours worked.
-//    private int actProgressDuration;
+    private static int activityNumID = 0;
+    private String activityID;
+    private String activityName;
+    private String activityDescription;
+    private double estimatedTimeInWeek;
+    private ArrayList<String> staffs;
+    private ArrayList<Activity> dependencies;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private double earlyStart = -1;
+    private double earlyFinish = -1;
+    private double lateStart = -1;
+    private double lateFinish = -1;
+    private double totalSlack = -1;
+    private Status activityStatus;
+    private ArrayList<Skill> listOfSkillsNeeded;
 
-    public Activity(String actID, ArrayList<String> actStaff, Status actStatus, Date startDate, Date endDate) {
-        this.actID = actID;
-        this.actStaff = actStaff;
-        this.actStatus = actStatus;
-        this.startDate = startDate;
-        this.endDate = endDate;
-//        this.actDuration =  (int)( (startDate.getTime() - endDate.getTime())/(1000 * 60 * 60 * 24) );
-//        this.actProgressDuration = 0;
+    //Constructor
+    public Activity(String name, String description, double duration, ArrayList<Activity> dependencies) {
+        this.activityName = name;
+        this.activityDescription = description;
+        this.estimatedTimeInWeek = duration;
+        this.activityStatus = Status.OPEN;
+        this.dependencies = dependencies;
+        if(this.dependencies == null){
+            this.earlyStart = 0;
+            this.earlyFinish = this.earlyStart+this.estimatedTimeInWeek;
+        }
+        generateActivityId();
+        activityNumID++;
     }
 
-//    public int getActProgressDuration() {
-//        return actProgressDuration;
-//    }
-//
-//    public void setActProgressDuration(int actProgressDuration) {
-//        this.actProgressDuration = actProgressDuration;
-//    }
-
-    public Date getStartDate() {
-        return startDate;
+    //Getter methods
+    public double getEstimatedTimeInWeek() {
+        return estimatedTimeInWeek;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public String getActivityID(){
+        return this.activityID;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getActivityName(){
+        return this.activityName;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public ArrayList<Activity> getDependencies(){
+        return this.dependencies;
     }
 
-//    public int getActDuration() {
-//        return actDuration;
-//    }
-//
-//    public void setActDuration(int actDuration) {
-//        this.actDuration = actDuration;
-//    }
-
-    public String getActID() {
-        return actID;
+    public double getLateStart() {
+        return lateStart;
     }
 
-    public void setActID(String actID) {
-        this.actID = actID;
+    public double getEarlyStart() {
+        return earlyStart;
+    }
+
+    public double getEarlyFinish() {
+        return earlyFinish;
+    }
+
+    public double getLateFinish() {
+        return lateFinish;
+    }
+
+    public double getTotalSlack() {
+        return totalSlack;
+    }
+
+    //Setter methods
+    public void setEstimatedTimeInWeek(double estimatedTimeInWeek) {
+        this.estimatedTimeInWeek = estimatedTimeInWeek;
+    }
+
+    public void setEarlyStart(double value){
+        this.earlyStart = value;
+    }
+
+    public void setEarlyFinish(double value){
+        this.earlyFinish = value;
+    }
+
+    public void setLateStart(double value) {
+        this.lateStart = value;
+    }
+
+    public void setLateFinish(double value){
+        this.lateFinish = value;
     }
 
     public ArrayList<String> getActStaff() {
-        return actStaff;
+        return this.staffs;
     }
 
-    public void setActStaff(ArrayList<String> actStaff) {
-        this.actStaff = actStaff;
-    }
-
-    public Status getActStatus() {
-        return actStatus;
-    }
-
-    public void setActStatus(Status actStatus) {
-        this.actStatus = actStatus;
+    public void setActStatus(Status activityStatus) {
+        this.activityStatus = activityStatus;
     }
 
     public Boolean assignStaff(String staffID){
@@ -87,17 +111,40 @@ public class Activity {
             return false;
         }
         getActStaff().add(staffID);
+    
         return true;
     }
 
-    public void progressCheck(Date date) {
-        if (date.compareTo(endDate)>0){
+    public void setTotalSlack(double value){
+        this.totalSlack = value;
+    }
+
+    /*****************************************************************************************
+     * Method name       : generateActivityId()
+     * Return type       : void
+     * Creator           : Vijit Kumar (s3799493)
+     * Method description: This method is called in a constructor and then generates a unique
+     *                     ID for an activity object.
+     *****************************************************************************************/
+    public void generateActivityId() {
+        String s1 = "A";
+        String str = String.format("%d", activityNumID);
+        String s = s1+str;
+        this.activityID = s;
+    }
+
+    public void progressCheck(LocalDate date) {
+        if (date.compareTo(this.endDate) > 0) {
             setActStatus(Status.OVER_DUE);
         }
     }
 
     @Override
     public String toString() {
-        return "model.Activity [id = " + this.actID + ", staff = " + this.actStaff + ", Status = " + this.actStatus.toString() + ", startDate = " + this.startDate + ", endDate = " + this.endDate;
+        return "activityID: " + this.activityID + ", activityName: " + this.activityName +
+                ", activityDuration: " + this.estimatedTimeInWeek +
+                ", earlyStart: " + this.earlyStart + ", earlyFinish: " + this.earlyFinish +
+                ", lateStart: " + this.lateStart + ", lateFinish: " + this.lateFinish +
+                ", totalSlack: " + this.totalSlack;
     }
 }
