@@ -6,8 +6,9 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
-import model.DataManager;
+import model.Employee;
 import model.User;
+import model.DataManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class RegisterController {
     public void handleSignUp(ActionEvent event) throws IOException {
         ArrayList<User> users = DataManager.getInstance().getUsers();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project.fxml"));
 
         Parent register = loader.load();
 
@@ -62,13 +63,12 @@ public class RegisterController {
 
     private void createUserAndSwitchScene(int id, FXMLLoader loader, Scene scene, Stage window) {
         if (password.getText().equals(confirmPassword.getText())) {
-            User newUser = new User(Integer.toString(id), username.getText(), password.getText(),null);
-            DataManager.getInstance().addUsersToDB(newUser);
+            Employee newEmployee = new Employee(Integer.toString(id), username.getText(), password.getText());
+            DataManager.getInstance().addUsersToDB(newEmployee);
             window.setScene(scene);
 
-            DashboardController dashboardController = loader.<DashboardController>getController();
-            dashboardController.setUsername(username.getText());
-            
+            ProjectController projectController = loader.<ProjectController>getController();
+
             window.show();
         }
     }

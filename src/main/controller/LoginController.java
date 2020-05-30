@@ -2,15 +2,24 @@ package controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import enumerations.Competency;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.*;
-import model.DataManager;
-import model.User;
+import model.*;
 
 import java.io.IOException;
+//TO REMOVE WHEN DELETING DUMMY DATA
+import java.sql.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import enumerations.Status;
+import enumerations.availability;
 
 public class LoginController {
     @FXML
@@ -19,14 +28,71 @@ public class LoginController {
     @FXML
     private JFXPasswordField password;
 
+    // Create dummy data at StartUp
     public LoginController() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
+        formatter = formatter.withLocale(Locale.ENGLISH);
+        ArrayList<Activity> activities = new ArrayList<Activity>();
+        ArrayList<String> staff = new ArrayList<String>();
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        ArrayList<User> userList = new ArrayList<User>();
+        ArrayList<Project> projectList = new ArrayList<Project>();
+
+        userList = DataManager.getInstance().getUsers();
+        projectList = DataManager.getInstance().getProjects();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+        for (Project project : projectList) {
+            System.out.println(project);
+        }
+        skills.add(new Skill("Python", Competency.SIX));
+        DataManager.getInstance().addUsersToDB(new Employee("1", "vivek", "azerty123", skills, "1", availability.hundred));
+        skills.clear();
+        skills.add(new Skill("After Effect", Competency.TWO));
+        DataManager.getInstance().addUsersToDB(new Employee("2", "maxime", "azerty123", skills, "1", availability.hundred));
+        staff.add("1");
+        staff.add("2");
+        skills.clear();
+        skills.add(new Skill("Python", Competency.FIVE));
+        skills.add(new Skill("After Effect", Competency.THREE));
+        skills.add(new Skill("Java", Competency.SIX));
+        LocalDate start = LocalDate.of(2020, 06, 1);
+        LocalDate end = LocalDate.of(2020, 06, 10);
+        start.format(formatter);
+        end.format(formatter);
+        activities.add(new Activity("1", "Setting up project", staff, Status.TO_DO, start, end, availability.forty, skills));
+        staff.clear();
+        staff.add("1");
+        start = LocalDate.of(2020, 06, 11);
+        end = LocalDate.of(2020, 06, 20);
+        skills.clear();
+        skills.add(new Skill("Python", Competency.FIVE));
+        skills.add(new Skill("After Effect", Competency.TWO));
+        activities.add(new Activity("2", "Working on Front-end and back-end", staff, Status.PENDING, start, end, availability.eighty, skills));
+        staff.clear();
+        staff.add("2");
+        start = LocalDate.of(2020, 06, 21);
+        end = LocalDate.of(2020, 06, 30);
+        skills.clear();
+        skills.add(new Skill("Python", Competency.TEN));
+        skills.add(new Skill("After Effect", Competency.TWO));
+        activities.add(new Activity("3", "Working on Front-end", staff, Status.PENDING, start, end, availability.twenty, skills));
+        start = LocalDate.of(2020, 06, 1);
+        end = LocalDate.of(2020, 06, 30);
+        DataManager.getInstance().addProjectsToDB(new Project("1", "Web Development", Status.TO_DO, activities, start, end));
+        for (User user : DataManager.getInstance().getUsers()) {
+            if (user instanceof Employee) {
+                ((Employee) user).setCalendar();
+            }
+        }
     }
 
     @FXML
     private void handleSignIn(ActionEvent event) throws IOException {
         ArrayList<User> users = DataManager.getInstance().getUsers();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project.fxml"));
 
         Parent register = loader.load();
 
@@ -39,8 +105,7 @@ public class LoginController {
             if (user.getName().equals(username.getText()) && user.getPassword().equals(password.getText())) {
                 window.setScene(scene);
 
-                DashboardController dashboardController = loader.<DashboardController>getController();
-                dashboardController.setUsername(username.getText());
+                ProjectController projectController = loader.<ProjectController>getController();
 
                 window.show();
             }

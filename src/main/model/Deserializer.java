@@ -31,7 +31,6 @@ public class Deserializer {
         return users;
     }
 
-    
     public ArrayList<Project> project() {
         ArrayList<Project> projects = new ArrayList<>();
 
