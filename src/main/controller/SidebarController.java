@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.UserSession;
 
 import java.io.IOException;
 
@@ -77,6 +78,8 @@ public class SidebarController {
         window.setScene(scene);
 
         LoginController loginController = loader.<LoginController>getController();
+        // Remove User from Session at Logout
+        UserSession.getInstance().clearUser();
 
         window.show();
     }

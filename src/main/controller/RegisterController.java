@@ -49,7 +49,7 @@ public class RegisterController {
     public void handleSignUp(ActionEvent event) throws IOException {
         ArrayList<User> users = DataManager.getInstance().getUsers();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/project.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/login.fxml"));
 
         Parent register = loader.load();
 
@@ -57,20 +57,16 @@ public class RegisterController {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
+        // Create first user
+        if (users.size() <= 0) {
+            if (verifyCredentials(users, window, scene, loader)) {
+                return ;
+            }
+        }
+
         for (User user : users) {
-            if (!isUsernameTaken(users, username.getText()) && password.getText().equals(confirmPassword.getText())) {
-                if (managerCheckbox.isSelected()) {
-                    Manager newManager = new Manager(username.getText(), password.getText());
-                    DataManager.getInstance().addUsersToDB(newManager);
-                } else {
-                    Employee newEmployee = new Employee(username.getText(), password.getText());
-                    DataManager.getInstance().addUsersToDB(newEmployee);
-                }
-                window.setScene(scene);
-
-                ProjectController projectController = loader.<ProjectController>getController();
-
-                window.show();
+            if (verifyCredentials(users, window, scene, loader)) {
+                return ;
             }
         }
 
@@ -86,6 +82,27 @@ public class RegisterController {
             if (user.getName().equals(username)) {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    private Boolean verifyCredentials(ArrayList<User> users, Stage window, Scene scene, FXMLLoader loader) {
+        if (!isUsernameTaken(users, username.getText()) && password.getText().equals(confirmPassword.getText())) {
+            if (managerCheckbox.isSelected()) {
+                Manager newManager = new Manager(username.getText(), password.getText());
+                DataManager.getInstance().addUsersToDB(newManager);
+            } else {
+                Employee newEmployee = new Employee(username.getText(), password.getText());
+                DataManager.getInstance().addUsersToDB(newEmployee);
+            }
+
+            window.setScene(scene);
+
+            LoginController loginController = loader.<LoginController>getController();
+
+            window.show();
+            return true;
         }
 
         return false;

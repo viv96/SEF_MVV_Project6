@@ -28,11 +28,5 @@ public class Skill implements Serializable {
         this.skillName = skillName;
         this.skillLevel = skillLevel;
     }
-
-    @Override
-    public String toString() {
-        return "[ " + this.skillName + "\n" +
-                this.skillLevel.toString() + " ]\n";
-    }
 }
 

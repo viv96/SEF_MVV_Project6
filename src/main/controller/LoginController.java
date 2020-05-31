@@ -31,7 +31,7 @@ public class LoginController {
 
     // Create dummy data at StartUp
     public LoginController() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
+        /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd"); //the date stored in the project class must be stored in yyyy-MMM-dd format.
         formatter = formatter.withLocale(Locale.ENGLISH);
         ArrayList<Activity> activities = new ArrayList<Activity>();
         ArrayList<String> staff = new ArrayList<String>();
@@ -89,7 +89,7 @@ public class LoginController {
             if (user instanceof Employee) {
                 ((Employee) user).setCalendar();
             }
-        }
+        }*/
     }
 
     @FXML
@@ -104,14 +104,16 @@ public class LoginController {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-
         for (User user : users) {
             if (user.getName().equals(username.getText()) && user.getPassword().equals(password.getText())) {
                 window.setScene(scene);
 
                 ProjectController projectController = loader.<ProjectController>getController();
+                //Init UserSession at login
+                UserSession.getInstance().setUser(user);
 
                 window.show();
+                return ;
             }
         }
 
