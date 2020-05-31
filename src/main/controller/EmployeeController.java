@@ -232,11 +232,13 @@ public class EmployeeController implements Initializable {
         String skill = skillTF.getText();
         Competency competency = levelCB.getSelectionModel().getSelectedItem();
 
-        // Set skill to that Employee
-        employee.setSkills(new Skill(skill, competency));
+        if (skill != null && competency != null) {
+            // Set skill to that Employee
+            employee.setSkills(new Skill(skill, competency));
 
-        //Update that employee in our Database
-        DataManager.getInstance().addUsersToDB(employee);
+            //Update that employee in our Database
+            DataManager.getInstance().addUsersToDB(employee);
+        }
 
         //Refresh TableView
         employeeTV.refresh();
