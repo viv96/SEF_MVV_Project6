@@ -50,36 +50,16 @@ public class RegisterController {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        if (users.size() == 0) {
-            this.createUserAndSwitchScene(1, loader, scene, window);
-        }
-
-        if (!checkUsernameIsTaken(users)) {
-            for (User user : users) {
-                this.createUserAndSwitchScene(users.size(), loader, scene, window);
-            }
-        }
-    }
-
-    private void createUserAndSwitchScene(int id, FXMLLoader loader, Scene scene, Stage window) {
-        if (password.getText().equals(confirmPassword.getText())) {
-            Employee newEmployee = new Employee(Integer.toString(id), username.getText(), password.getText());
-            DataManager.getInstance().addUsersToDB(newEmployee);
-            window.setScene(scene);
-
-            ProjectController projectController = loader.<ProjectController>getController();
-
-            window.show();
-        }
-    }
-
-    private boolean checkUsernameIsTaken (ArrayList<User> users) {
         for (User user : users) {
-            if (user.getName().equals(username.getText())) {
-                return true;
+            if (user.getName().equals(username.getText()) && password.getText().equals(confirmPassword.getText())) {
+                Employee newEmployee = new Employee(username.getText(), password.getText());
+                DataManager.getInstance().addUsersToDB(newEmployee);
+                window.setScene(scene);
+
+                ProjectController projectController = loader.<ProjectController>getController();
+
+                window.show();
             }
         }
-
-        return false;
     }
 }

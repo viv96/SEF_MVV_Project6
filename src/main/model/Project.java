@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Project implements Serializable {
-    private static int projectNumID = 0;
     private String projectID;
     private String projectName;
     private String projectDescription;
@@ -18,17 +17,14 @@ public class Project implements Serializable {
     private Status projectStatus;
     private ArrayList<Activity> listOfActivities = new ArrayList<Activity>();
 
-    public Project(String projectID, String projectName, String projectDescription, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
-        super();
-        this.projectID = projectID;
+    public Project(String projectName, String projectDescription, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
+        this.projectID = UUID.randomUUID().toString();
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.projectStatus = status;
         this.listOfActivities = activities;
         this.projectStartDate = projectStartDate;
         this.projectEndDate = projectEndDate;
-        projectNumID++;
-        generateProjectId();
     }
 
     //Getter method List of Activities
@@ -66,20 +62,6 @@ public class Project implements Serializable {
 
     public void setProjectEndDate(LocalDate projectEndDate) {
         this.projectEndDate = projectEndDate;
-    }
-
-    /*******************************************************************************************************************
-     * Method name       : generateProjectId()
-     * Return type       : void
-     * Creator           : Vijit Kumar (s3799493)
-     * Method description: This method is called in a constructor and then generates a unique
-     *                     ID for an project object.
-     ******************************************************************************************************************/
-    public void generateProjectId() {
-        String s1 = "P";
-        String str = String.format("%d", projectNumID);
-        String s = s1+str;
-        this.projectID = s;
     }
 
     /*******************************************************************************************************************

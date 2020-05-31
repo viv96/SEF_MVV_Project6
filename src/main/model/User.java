@@ -3,14 +3,14 @@ package model;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class User implements Serializable {
     private String id;
     private String name;
     private String password;
-    private ArrayList<String> empProjects = new ArrayList<String>();
-    private ArrayList<Project> involvedInProjects;
-    private ArrayList<Skill> listOfSkills;
+    private ArrayList<String> projects_id = new ArrayList<String>();
+    private ArrayList<Skill> skills = new ArrayList<Skill>();
 
     public String getId() {
         return id;
@@ -36,26 +36,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public ArrayList<String> getProjectsID() {
-        return empProjects;
-    }
 
-    public void setProjectsID(String projectsID) {
-        this.empProjects.add(projectsID);
-    }
-
-    public User(String id, String name, String password, String projectID) {
-        super();
-        this.id = id;
+    public User(String name, String password) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.password = password;
-        if (projectID != null) {
-            this.empProjects.add(projectID);
-        }
-    }
-
-    public ArrayList<String> getEmpProjects() {
-        return empProjects;
     }
 
     @Override

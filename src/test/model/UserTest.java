@@ -12,7 +12,7 @@ class UserTest {
 
     @BeforeEach
     public void setUp() {
-        user = new User("1", "amin", "azerty123",null);
+        user = new User("amin", "azerty123");
     }
 
     @AfterEach

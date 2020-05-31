@@ -9,9 +9,9 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class Activity implements Serializable {
-    private static int activityNumID = 0;
     private String activityID;
     private String activityName;
     private String activityDescription;
@@ -29,7 +29,8 @@ public class Activity implements Serializable {
     private availability dayPerWeek;
     private ArrayList<Skill> listOfSkillsNeeded;
 
-    public Activity(String id, String name, String description, double duration, ArrayList<String> staffs_id, LocalDate startDate, LocalDate endDate, availability dayPerWeek, ArrayList<Activity> dependencies, ArrayList<Skill> skillRequired) {
+    public Activity(String name, String description, double duration, ArrayList<String> staffs_id, LocalDate startDate, LocalDate endDate, availability dayPerWeek, ArrayList<Activity> dependencies, ArrayList<Skill> skillRequired) {
+        this.activityID = UUID.randomUUID().toString();
         this.actStaff = staffs_id;
         this.activityStatus = Status.OPEN;
         this.startDate = startDate;
@@ -40,12 +41,10 @@ public class Activity implements Serializable {
         this.activityDescription = description;
         this.estimatedTimeInWeek = duration;
         this.dependencies = dependencies;
-        if(this.dependencies == null){
+        if (this.dependencies == null) {
             this.earlyStart = 0;
             this.earlyFinish = this.earlyStart+this.estimatedTimeInWeek;
         }
-        generateActivityId();
-        activityNumID++;
     }
 
     //Getter methods
@@ -158,6 +157,14 @@ public class Activity implements Serializable {
         this.actStaff = staffs_id;
     }
 
+    public availability getDayPerWeek() {
+        return this.dayPerWeek;
+    }
+
+    public void setDayPerWeek(availability dayPerWeek) {
+        this.dayPerWeek = dayPerWeek;
+    }
+
     public Boolean assignStaff(String staffID){
         if (getStaffs_id().contains(staffID)) {
             return false;
@@ -169,20 +176,6 @@ public class Activity implements Serializable {
 
     public void setTotalSlack(double value){
         this.totalSlack = value;
-    }
-
-    /*****************************************************************************************
-     * Method name       : generateActivityId()
-     * Return type       : void
-     * Creator           : Vijit Kumar (s3799493)
-     * Method description: This method is called in a constructor and then generates a unique
-     *                     ID for an activity object.
-     *****************************************************************************************/
-    public void generateActivityId() {
-        String s1 = "A";
-        String str = String.format("%d", activityNumID);
-        String s = s1+str;
-        this.activityID = s;
     }
 
     public void progressCheck(LocalDate date) {

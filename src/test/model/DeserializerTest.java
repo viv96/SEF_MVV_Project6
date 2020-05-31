@@ -27,8 +27,8 @@ class DeserializerTest {
         this.deserializer = new Deserializer();
 
 
-        this.users.add(new User("1", "maxime","azerty123", null));
-        this.users.add(new User("2", "vivek","azerty123", null));
+        this.users.add(new User("maxime","azerty123"));
+        this.users.add(new User( "vivek","azerty123"));
         this.serializer.user(this.users);
     }
 
