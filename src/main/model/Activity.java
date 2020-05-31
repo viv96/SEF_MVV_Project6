@@ -29,7 +29,7 @@ public class Activity implements Serializable {
     private availability dayPerWeek;
     private ArrayList<Skill> listOfSkillsNeeded;
 
-    public Activity(String id, String name, String description, double duration, ArrayList<String> staffs_id, LocalDate startDate, LocalDate endDate, availability dayPerWeek, ArrayList<Skill> skillRequired) {
+    public Activity(String id, String name, String description, double duration, ArrayList<String> staffs_id, LocalDate startDate, LocalDate endDate, availability dayPerWeek, ArrayList<Activity> dependencies, ArrayList<Skill> skillRequired) {
         this.actStaff = staffs_id;
         this.activityStatus = Status.OPEN;
         this.startDate = startDate;
@@ -202,7 +202,7 @@ public class Activity implements Serializable {
         ", lateFinish: " + this.lateFinish +
         ", totalSlack: " + this.totalSlack + 
         ", staff = " + this.actStaff +
-        ", Status = " + this.status.toString() + 
+        ", Status = " + this.activityStatus.toString() +
         ", startDate = " + this.startDate + 
         ", endDate = " + this.endDate + "]";
     }

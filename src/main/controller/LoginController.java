@@ -61,7 +61,7 @@ public class LoginController {
         LocalDate end = LocalDate.of(2020, 06, 10);
         start.format(formatter);
         end.format(formatter);
-        activities.add(new Activity("1", "Setting up project", staff, Status.TO_DO, start, end, availability.forty, skills));
+        activities.add(new Activity("1", "Setting up project", "Awesome", 2, staff, start, end, availability.forty, null, skills));
         staff.clear();
         staff.add("1");
         start = LocalDate.of(2020, 06, 11);
@@ -69,7 +69,7 @@ public class LoginController {
         skills.clear();
         skills.add(new Skill("Python", Competency.FIVE));
         skills.add(new Skill("After Effect", Competency.TWO));
-        activities.add(new Activity("2", "Working on Front-end and back-end", staff, Status.PENDING, start, end, availability.eighty, skills));
+        activities.add(new Activity("2", "Working on Front-end and back-end", "Wow", 2, staff, start, end, availability.eighty, null, skills));
         staff.clear();
         staff.add("2");
         start = LocalDate.of(2020, 06, 21);
@@ -77,10 +77,10 @@ public class LoginController {
         skills.clear();
         skills.add(new Skill("Python", Competency.TEN));
         skills.add(new Skill("After Effect", Competency.TWO));
-        activities.add(new Activity("3", "Working on Front-end", staff, Status.PENDING, start, end, availability.twenty, skills));
+        activities.add(new Activity("3", "Working on Front-end", "Yes baby", 2, staff, start, end, availability.twenty, null, skills));
         start = LocalDate.of(2020, 06, 1);
         end = LocalDate.of(2020, 06, 30);
-        DataManager.getInstance().addProjectsToDB(new Project("1", "Web Development", Status.TO_DO, activities, start, end));
+        DataManager.getInstance().addProjectsToDB(new Project("1", "Web Development", "Amazing", Status.TO_DO, activities, start, end));
         for (User user : DataManager.getInstance().getUsers()) {
             if (user instanceof Employee) {
                 ((Employee) user).setCalendar();

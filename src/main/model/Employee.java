@@ -61,7 +61,7 @@ public class Employee extends User {
             // Verify he is assigned to this project
             if (project.getProjectID().equals(projectID)) {
                 // Get all activity associated to this project
-                for (Activity activity : project.getActivities()) {
+                for (Activity activity : project.getListOfActivities()) {
                     // Verify he is assigned to that activity
                     for (String staffId : activity.getStaffs_id()) {
                         if (staffId.equals(this.getId())) {

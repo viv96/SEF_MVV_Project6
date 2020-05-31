@@ -18,10 +18,11 @@ public class Project implements Serializable {
     private Status projectStatus;
     private ArrayList<Activity> listOfActivities = new ArrayList<Activity>();
 
-    public Project(String projectID, String projectName, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
+    public Project(String projectID, String projectName, String projectDescription, Status status, ArrayList<Activity> activities, LocalDate projectStartDate, LocalDate projectEndDate) {
         super();
         this.projectID = projectID;
         this.projectName = projectName;
+        this.projectDescription = projectDescription;
         this.projectStatus = status;
         this.listOfActivities = activities;
         this.projectStartDate = projectStartDate;
@@ -31,6 +32,22 @@ public class Project implements Serializable {
     }
 
     //Getter method List of Activities
+    public String getProjectID() {
+        return this.projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
+    public String getProjectDescription() {
+        return this.getProjectDescription();
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
+    }
+
     public ArrayList<Activity> getListOfActivities() {
         return listOfActivities;
     }
