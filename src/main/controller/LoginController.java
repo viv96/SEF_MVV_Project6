@@ -6,6 +6,7 @@ import enumerations.Competency;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
+import javafx.scene.control.Alert;
 import javafx.stage.*;
 import model.*;
 
@@ -48,6 +49,7 @@ public class LoginController {
             System.out.println(project);
         }
         skills.add(new Skill("Python", Competency.SIX));
+        skills.add(new Skill("Java", Competency.SIX));
         projectId.add("1");
         DataManager.getInstance().addUsersToDB(new Employee("vivek", "azerty123", skills, projectId, availability.hundred));
         skills.clear();
@@ -113,6 +115,11 @@ public class LoginController {
             }
         }
 
+        Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+        errorAlert.setTitle("Login");
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText("Username / password doesn't match");
+        errorAlert.showAndWait();
     }
 
     @FXML

@@ -31,7 +31,8 @@ public class Skill implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Skill [name = " + this.skillName + ", level = " + this.skillLevel.toString() + "]";
+        return "[ " + this.skillName + "\n" +
+                this.skillLevel.toString() + " ]\n";
     }
 }
 

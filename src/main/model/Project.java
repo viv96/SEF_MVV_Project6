@@ -299,11 +299,6 @@ public class Project implements Serializable {
 
         Project project = (Project) o;
 
-        return !(projectID != null ? !projectID.equals(project.projectID) : project.projectID != null);
-    }
-
-    @Override
-    public String toString() {
-        return "model.Project [name = " + this.projectName + ", status = " + this.projectStatus + ", activities = " + this.listOfActivities + "]";
+        return !(projectName != null ? !projectName.equals(project.projectName) : project.projectName != null);
     }
 }

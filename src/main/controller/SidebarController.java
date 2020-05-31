@@ -26,7 +26,6 @@ public class SidebarController {
         window.setScene(scene);
 
         ProjectController projectController = loader.<ProjectController>getController();
-        //projectController.setUsername(this.username);
 
         window.show();
     }
@@ -44,7 +43,6 @@ public class SidebarController {
         window.setScene(scene);
 
         EmployeeController employeeController = loader.<EmployeeController>getController();
-        //employeeController.setUsername(this.username);
 
         window.show();
     }
@@ -62,7 +60,6 @@ public class SidebarController {
         window.setScene(scene);
 
         CalendarController calendarController = loader.<CalendarController>getController();
-        //calendarController.setUsername(this.username);
 
         window.show();
     }
