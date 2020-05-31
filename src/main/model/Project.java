@@ -22,7 +22,8 @@ public class Project implements Serializable {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.projectStatus = status;
-        this.listOfActivities = activities;
+        if (activities != null)
+            this.listOfActivities = activities;
         this.projectStartDate = projectStartDate;
         this.projectEndDate = projectEndDate;
     }
@@ -36,8 +37,16 @@ public class Project implements Serializable {
         this.projectID = projectID;
     }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectName() {
+        return this.projectName;
+    }
+
     public String getProjectDescription() {
-        return this.getProjectDescription();
+        return this.projectDescription;
     }
 
     public void setProjectDescription(String projectDescription) {
@@ -46,6 +55,10 @@ public class Project implements Serializable {
 
     public ArrayList<Activity> getListOfActivities() {
         return listOfActivities;
+    }
+
+    public void setListOfActivities(Activity activity) {
+        listOfActivities.add(activity);
     }
 
     public LocalDate getProjectStartDate() {

@@ -57,16 +57,18 @@ public class RegisterController {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-        // Create first user
-        if (users.size() <= 0) {
-            if (verifyCredentials(users, window, scene, loader)) {
-                return ;
+        if (!username.getText().isEmpty() && !password.getText().isEmpty() && !confirmPassword.getText().isEmpty()) {
+            // Create first user
+            if (users.size() <= 0) {
+                if (verifyCredentials(users, window, scene, loader)) {
+                    return;
+                }
             }
-        }
 
-        for (User user : users) {
-            if (verifyCredentials(users, window, scene, loader)) {
-                return ;
+            for (User user : users) {
+                if (verifyCredentials(users, window, scene, loader)) {
+                    return;
+                }
             }
         }
 

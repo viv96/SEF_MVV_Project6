@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectController">
    <children>
-      <fx:include source="sidebar.fxml" fx:id="sidebar"></fx:include>
+      <fx:include fx:id="sidebar" source="sidebar.fxml" />
+      <StackPane layoutX="150.0" prefHeight="600.0" prefWidth="650.0">
+         <children>
+            <Pane fx:id="paneAddActivity" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="275.0" layoutY="40.0" text="Add activity" textFill="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitAddActivity" layoutX="275.0" layoutY="535.0" onAction="#handleSubmitAddActivity" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
+                  <JFXComboBox fx:id="statusActivityCB" layoutX="176.0" layoutY="265.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
+                  <JFXTextField fx:id="nameActivityTF" layoutX="175.0" layoutY="129.0" prefWidth="300.0" promptText="Name (eg. WebApp)" />
+                  <JFXTextArea fx:id="descActivityTA" layoutX="175.0" layoutY="184.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
+                  <DatePicker fx:id="start_dateActivityDP" layoutX="176.0" layoutY="393.0" prefHeight="28.0" prefWidth="300.0" promptText="Start date" />
+                  <DatePicker fx:id="end_dateActivityDP" layoutX="175.0" layoutY="450.0" prefHeight="28.0" prefWidth="300.0" promptText="End date" />
+                  <JFXComboBox fx:id="availabilityActivityCB" layoutX="176.0" layoutY="325.0" prefHeight="25.0" prefWidth="300.0" promptText="Availability" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneAddProject" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="275.0" layoutY="60.0" text="Add project" textFill="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitAddProject" layoutX="275.0" layoutY="515.0" onAction="#handleSubmitAddProject" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
+                  <JFXComboBox fx:id="statusProjectCB" layoutX="175.0" layoutY="294.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
+                  <JFXTextField fx:id="nameProjectTF" layoutX="175.0" layoutY="139.0" prefWidth="300.0" promptText="Name (eg. WebApp)" />
+                  <JFXTextArea fx:id="descProjectTA" layoutX="175.0" layoutY="204.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
+                  <DatePicker fx:id="start_dateProjectDP" layoutX="175.0" layoutY="362.0" prefHeight="28.0" prefWidth="300.0" promptText="Start date" />
+                  <DatePicker fx:id="end_dateProjectDP" layoutX="175.0" layoutY="430.0" prefHeight="28.0" prefWidth="300.0" promptText="End date" />
+               </children></Pane>
+            <Pane fx:id="paneTableView" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">
+               <children>
+                  <JFXButton fx:id="addProject" layoutX="550.0" layoutY="12.5" onAction="#handleAddProject" style="-fx-background-color: #4059a9;" text="Add Project" textFill="WHITE" />
+                  <TableView fx:id="projectTV" layoutY="50.0" prefHeight="550.0" prefWidth="650.0" stylesheets="@../css/style.css">
+                     <columns>
+                        <TableColumn fx:id="idTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="id" />
+                        <TableColumn fx:id="nameTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="name" />
+                        <TableColumn fx:id="descTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="desc" />
+                        <TableColumn fx:id="statusTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="status" />
+                        <TableColumn fx:id="start_dateTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="start date" />
+                        <TableColumn fx:id="end_dateTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="end date" />
+                        <TableColumn fx:id="activitiesTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="activities" />
+                        <TableColumn fx:id="actionsTC" maxWidth="81.25" minWidth="81.25" prefWidth="81.25" resizable="false" text="actions" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

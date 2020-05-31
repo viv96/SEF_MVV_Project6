@@ -249,7 +249,7 @@ public class EmployeeController implements Initializable {
         String skill = skillTF.getText();
         Competency competency = levelCB.getSelectionModel().getSelectedItem();
 
-        if (skill != null && competency != null) {
+        if (!skill.isEmpty() && competency != null) {
             // Set skill to that Employee
             employee.setSkills(new Skill(skill, competency));
 

@@ -47,6 +47,16 @@ public class Activity implements Serializable {
         }
     }
 
+    public Activity(String name, String description, Status status, availability dayPerWeek, LocalDate startDate, LocalDate endDate) {
+        this.activityID = UUID.randomUUID().toString();
+        this.activityStatus = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dayPerWeek = dayPerWeek;
+        this.activityName = name;
+        this.activityDescription = description;
+    }
+
     //Getter methods
     public double getEstimatedTimeInWeek() {
         return estimatedTimeInWeek;
@@ -112,6 +122,10 @@ public class Activity implements Serializable {
         return totalSlack;
     }
 
+    public Status getActivityStatus() {
+        return activityStatus;
+    }
+
     //Setter methods
     public void setEstimatedTimeInWeek(double estimatedTimeInWeek) {
         this.estimatedTimeInWeek = estimatedTimeInWeek;
@@ -165,6 +179,10 @@ public class Activity implements Serializable {
         this.dayPerWeek = dayPerWeek;
     }
 
+    public void setActivityStatus(Status activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
     public Boolean assignStaff(String staffID){
         if (getStaffs_id().contains(staffID)) {
             return false;
@@ -182,5 +200,10 @@ public class Activity implements Serializable {
         if (date.compareTo(this.endDate) > 0) {
             setActStatus(Status.OVER_DUE);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "\n[name: " + this.activityName + "]\n";
     }
 }
