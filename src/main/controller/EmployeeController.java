@@ -18,6 +18,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -119,10 +120,18 @@ public class EmployeeController implements Initializable {
                                 } else {
                                     btnSkills.setStyle("-fx-background-color:  #4059a9; -fx-border-color: white; -fx-text-fill: white");
                                     btnSkills.setOnAction(event -> {
-                                        paneEditSkills.setVisible(true);
-                                        paneEditProjects.setVisible(false);
-                                        paneTableView.setVisible(false);
-                                        employeeIdx = getIndex();
+                                        if (UserSession.getInstance().isManager()) {
+                                            paneEditSkills.setVisible(true);
+                                            paneEditProjects.setVisible(false);
+                                            paneTableView.setVisible(false);
+                                            employeeIdx = getIndex();
+                                        } else {
+                                            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+                                            errorAlert.setTitle("Employee");
+                                            errorAlert.setHeaderText(null);
+                                            errorAlert.setContentText("You're not a Manager, access refused!");
+                                            errorAlert.showAndWait();
+                                        }
                                     });
 
                                     setGraphic(btnSkills);
@@ -153,10 +162,18 @@ public class EmployeeController implements Initializable {
                                 } else {
                                     btnProjects.setStyle("-fx-background-color:  #4059a9; -fx-border-color: white; -fx-text-fill: white");
                                     btnProjects.setOnAction(event -> {
-                                        paneEditSkills.setVisible(false);
-                                        paneEditProjects.setVisible(true);
-                                        paneTableView.setVisible(false);
-                                        employeeIdx = getIndex();
+                                        if (UserSession.getInstance().isManager()) {
+                                            paneEditSkills.setVisible(false);
+                                            paneEditProjects.setVisible(true);
+                                            paneTableView.setVisible(false);
+                                            employeeIdx = getIndex();
+                                        } else {
+                                            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+                                            errorAlert.setTitle("Employee");
+                                            errorAlert.setHeaderText(null);
+                                            errorAlert.setContentText("You're not a Manager, access refused!");
+                                            errorAlert.showAndWait();
+                                        }
                                     });
                                     setGraphic(btnProjects);
                                     setText(null);
