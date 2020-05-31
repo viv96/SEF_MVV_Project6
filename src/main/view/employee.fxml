@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeController">
    <children>
       <fx:include fx:id="sidebar" source="sidebar.fxml" />
-      <TableView fx:id="employeeTV" layoutX="151.0" prefHeight="600.0" prefWidth="650.0">
-        <columns>
-            <TableColumn fx:id="idTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="id" />
-            <TableColumn fx:id="usernameTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="username" />
-            <TableColumn fx:id="skillsTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="skills" />
-            <TableColumn fx:id="projects_idTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="projects id" />
-            <TableColumn fx:id="actionsTC" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" text="actions">
-               <columns>
-                  <TableColumn fx:id="skillsActionTC" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" resizable="false" text="skills" />
-                  <TableColumn fx:id="projectsActionTC" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" resizable="false" text="projects" />
-               </columns></TableColumn>
-        </columns>
-      </TableView>
+      <StackPane fx:id="stackPane" layoutX="150.0" prefHeight="600.0" prefWidth="650.0">
+         <children>
+            <Pane fx:id="paneEditSkills" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">
+               <children>
+                  <JFXTextField fx:id="skillTF" layoutX="226.0" layoutY="230.0" prefHeight="25.0" prefWidth="200.0" promptText="Skill name (eg. python)" />
+                  <Label layoutX="293.0" layoutY="100.0" text="Add skills" textFill="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitAddSkills" layoutX="258.0" layoutY="500.0" onAction="#handleSubmitAddSkills" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
+                  <JFXComboBox fx:id="levelCB" layoutX="225.0" layoutY="320.0" prefHeight="25.0" prefWidth="200.0" promptText="Skill level" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneEditProjects" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="283.0" layoutY="100.0" text="Add projects" textFill="#4059a9">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="submitAddProjects" layoutX="258.0" layoutY="500.0" onAction="#handleSubmitAddProjects" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
+                  <JFXComboBox fx:id="projectCB" layoutX="225.0" layoutY="288.0" prefHeight="25.0" prefWidth="200.0" promptText="Select project" />
+               </children>
+            </Pane>
+            <Pane fx:id="paneTableView" prefHeight="600.0" prefWidth="650.0">
+               <children>
+                  <TableView fx:id="employeeTV" prefHeight="600.0" prefWidth="650.0">
+                    <columns>
+                        <TableColumn fx:id="idTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="id" />
+                        <TableColumn fx:id="usernameTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="username" />
+                        <TableColumn fx:id="skillsTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="skills" />
+                        <TableColumn fx:id="projects_idTC" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="projects id" />
+                        <TableColumn fx:id="actionsTC" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" text="actions">
+                           <columns>
+                              <TableColumn fx:id="skillsActionTC" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" resizable="false" text="skills" />
+                              <TableColumn fx:id="projectsActionTC" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" resizable="false" text="projects" />
+                           </columns>
+                        </TableColumn>
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

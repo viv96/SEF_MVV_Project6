@@ -1,26 +1,35 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
+import enumerations.Competency;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.DataManager;
-import model.Employee;
-import model.Skill;
-import model.User;
+import model.*;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +37,18 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class EmployeeController implements Initializable {
+    @FXML
+    private StackPane stackPane;
+
+    @FXML
+    private Pane paneEditSkills;
+
+    @FXML
+    private Pane paneEditProjects;
+
+    @FXML
+    private Pane paneTableView;
+
     @FXML
     private TableView<Employee> employeeTV;
 
@@ -51,6 +72,23 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private TableColumn<Employee, String> projectsActionTC;
+
+    @FXML
+    private JFXTextField skillTF;
+
+    @FXML
+    private JFXComboBox<Competency> levelCB;
+
+    @FXML
+    private JFXButton submitAddSkills;
+
+    @FXML
+    private JFXComboBox<String> projectCB;
+
+    @FXML
+    private JFXButton submitAddProjects;
+
+    private Integer employeeIdx;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,9 +119,10 @@ public class EmployeeController implements Initializable {
                                 } else {
                                     btnSkills.setStyle("-fx-background-color:  #4059a9; -fx-border-color: white; -fx-text-fill: white");
                                     btnSkills.setOnAction(event -> {
-                                        Employee employee = getTableView().getItems().get(getIndex());
-                                        System.out.println(employee.getName()
-                                                + "   " + employee.getId());
+                                        paneEditSkills.setVisible(true);
+                                        paneEditProjects.setVisible(false);
+                                        paneTableView.setVisible(false);
+                                        employeeIdx = getIndex();
                                     });
 
                                     setGraphic(btnSkills);
@@ -114,9 +153,10 @@ public class EmployeeController implements Initializable {
                                 } else {
                                     btnProjects.setStyle("-fx-background-color:  #4059a9; -fx-border-color: white; -fx-text-fill: white");
                                     btnProjects.setOnAction(event -> {
-                                        Employee employee = getTableView().getItems().get(getIndex());
-                                        System.out.println(employee.getName()
-                                                + "   " + employee.getId());
+                                        paneEditSkills.setVisible(false);
+                                        paneEditProjects.setVisible(true);
+                                        paneTableView.setVisible(false);
+                                        employeeIdx = getIndex();
                                     });
                                     setGraphic(btnProjects);
                                     setText(null);
@@ -129,6 +169,23 @@ public class EmployeeController implements Initializable {
 
         skillsActionTC.setCellFactory(cellSkillsAction);
         projectsActionTC.setCellFactory(cellProjectsAction);
+
+        levelCB.getItems().addAll(
+                Competency.ONE,
+                Competency.TWO,
+                Competency.THREE,
+                Competency.FOUR,
+                Competency.FIVE,
+                Competency.SIX,
+                Competency.SEVEN,
+                Competency.EIGHT,
+                Competency.NINE,
+                Competency.TEN
+        );
+
+        for (Project project : DataManager.getInstance().getProjects()) {
+            projectCB.getItems().add(project.getProjectID());
+        }
 
         employeeTV.setItems(getEmployees());
     }
@@ -143,5 +200,50 @@ public class EmployeeController implements Initializable {
         }
 
         return employees;
+    }
+
+    @FXML
+    private void handleSubmitAddProjects(ActionEvent event) throws IOException {
+        Employee employee = employeeTV.getItems().get(employeeIdx);
+
+        String project_id = projectCB.getSelectionModel().getSelectedItem();
+
+        // Set projects_id to that Employee
+        if (project_id != null) {
+            employee.setProjectsID(project_id);
+
+            //Update that employee in our Database
+            DataManager.getInstance().addUsersToDB(employee);
+        }
+
+        //Refresh TableView
+        employeeTV.refresh();
+
+        // Switch Pane
+        paneEditSkills.setVisible(false);
+        paneEditProjects.setVisible(false);
+        paneTableView.setVisible(true);
+    }
+
+    @FXML
+    private void handleSubmitAddSkills(ActionEvent event) throws IOException {
+        Employee employee = employeeTV.getItems().get(employeeIdx);
+
+        String skill = skillTF.getText();
+        Competency competency = levelCB.getSelectionModel().getSelectedItem();
+
+        // Set skill to that Employee
+        employee.setSkills(new Skill(skill, competency));
+
+        //Update that employee in our Database
+        DataManager.getInstance().addUsersToDB(employee);
+
+        //Refresh TableView
+        employeeTV.refresh();
+
+        // Switch Pane
+        paneEditSkills.setVisible(false);
+        paneEditProjects.setVisible(false);
+        paneTableView.setVisible(true);
     }
 }

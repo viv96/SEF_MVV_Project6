@@ -40,8 +40,8 @@ public class Employee extends User {
         return skills;
     }
 
-    public void setSkills(ArrayList<Skill> skills) {
-        this.skills = skills;
+    public void setSkills(Skill skill) {
+        this.skills.add(skill);
     }
 
     public ArrayList<String> getProjectsID() {
