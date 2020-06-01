@@ -81,7 +81,6 @@ public class DataManager {
         }
         // Erase file content before adding new entry
         this.eraseFile("projects.ser");
-        //this.serialize.project(new ArrayList<Project>());
         this.serialize.project(projects);
     }
 

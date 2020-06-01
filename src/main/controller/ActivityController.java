@@ -75,6 +75,9 @@ public class ActivityController implements Initializable {
     @FXML
     private JFXComboBox<availability> availabilityActivityCB;
 
+    @FXML
+    private JFXComboBox<String> employeeActivityCB;
+
     private Integer activityIdx;
 
     @Override
@@ -154,6 +157,13 @@ public class ActivityController implements Initializable {
                 availability.hundred
         );
 
+        // Populate ComboBox with Employee ID
+        for (User user : DataManager.getInstance().getUsers()) {
+            if (user instanceof Employee) {
+                employeeActivityCB.getItems().add(user.getId());
+            }
+        }
+
         activityTV.setItems(getActivities());
     }
 
@@ -178,6 +188,7 @@ public class ActivityController implements Initializable {
         String desc = descActivityTA.getText();
         Status status = statusActivityCB.getSelectionModel().getSelectedItem();
         availability timePerWeek = availabilityActivityCB.getSelectionModel().getSelectedItem();
+        String employeeId = employeeActivityCB.getSelectionModel().getSelectedItem();
         LocalDate start_date = start_dateActivityDP.getValue();
         LocalDate end_date = end_dateActivityDP.getValue();
 
@@ -200,6 +211,9 @@ public class ActivityController implements Initializable {
         }
         if (!desc.isEmpty()) {
             activityToEdit.setActivityDescription(desc);
+        }
+        if (!employeeId.isEmpty()) {
+            activityToEdit.setActStaff(employeeId);
         }
         if (status != null) {
             activityToEdit.setActStatus(status);

@@ -77,7 +77,13 @@ public class Employee extends User {
                             for (Skill activitySkill : activity.getSkillRequired()) {
                                 for (Skill userSkill : this.getSkills()) {
                                     if (activitySkill.getSkillName().equals(userSkill.getSkillName()) && activitySkill.getSkillLevel().ordinal() <= userSkill.getSkillLevel().ordinal()) {
-                                        this.employeeCalendars.add(new EmployeeCalendar(activity.getActivityID(), activity.getActivityName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
+                                        Integer calendarIdx = getCalendarIdx(activity);
+
+                                        if (calendarIdx == -1) {
+                                            this.employeeCalendars.add(new EmployeeCalendar(activity.getActivityID(), activity.getActivityName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
+                                        } else {
+                                            this.employeeCalendars.set(calendarIdx, new EmployeeCalendar(activity.getActivityID(), activity.getActivityName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
+                                        }
                                     }
                                 }
                             }
@@ -92,6 +98,21 @@ public class Employee extends User {
 
     public ArrayList<EmployeeCalendar> getCalendar() {
         return this.employeeCalendars;
+    }
+
+    private Integer getCalendarIdx(Activity activity) {
+        Integer employeeCalendarIdx = -1;
+
+        for (EmployeeCalendar employeeCalendar : this.employeeCalendars) {
+            if (employeeCalendar.getId().equals(activity.getActivityID())) {
+                ++employeeCalendarIdx;
+                this.employeeCalendars.set(employeeCalendarIdx, employeeCalendar);
+                return employeeCalendarIdx;
+            }
+            employeeCalendarIdx++;
+        }
+
+        return employeeCalendarIdx;
     }
 
     public Boolean setActivityStatus(Activity activity, Status status) {

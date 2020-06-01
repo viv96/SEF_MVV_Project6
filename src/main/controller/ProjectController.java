@@ -1,6 +1,7 @@
 package controller;
 
         import com.jfoenix.controls.*;
+        import enumerations.Competency;
         import enumerations.Status;
         import enumerations.availability;
         import javafx.beans.property.*;
@@ -93,6 +94,12 @@ public class ProjectController implements Initializable {
     private DatePicker end_dateActivityDP;
 
     @FXML
+    private JFXTextField skillNameActivityTF;
+
+    @FXML
+    private JFXComboBox<Competency> skillCompetencyActivityCB;
+
+    @FXML
     private JFXComboBox<Status> statusActivityCB;
 
     @FXML
@@ -172,46 +179,20 @@ public class ProjectController implements Initializable {
                 availability.hundred
         );
 
+        skillCompetencyActivityCB.getItems().addAll(
+                Competency.ONE,
+                Competency.TWO,
+                Competency.THREE,
+                Competency.FOUR,
+                Competency.FIVE,
+                Competency.SIX,
+                Competency.SEVEN,
+                Competency.EIGHT,
+                Competency.NINE,
+                Competency.TEN
+        );
+
         projectTV.setItems(getProjects());
-        projectTV.getSelectionModel().setCellSelectionEnabled(true);
-        projectTV.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        copySelectionToClipboard(projectTV);
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void copySelectionToClipboard(final TableView<Project> table) {
-        final Set<Integer> rows = new TreeSet<>();
-        for (final TablePosition tablePosition : table.getSelectionModel().getSelectedCells()) {
-            rows.add(tablePosition.getRow());
-        }
-        final StringBuilder strb = new StringBuilder();
-        boolean firstRow = true;
-        for (final Integer row : rows) {
-            if (!firstRow) {
-                strb.append('\n');
-            }
-            firstRow = false;
-            boolean firstCol = true;
-            for (final TableColumn<?, ?> column : table.getColumns()) {
-                if (!firstCol) {
-                    strb.append('\t');
-                }
-                firstCol = false;
-                final Object cellData = column.getCellData(row);
-                strb.append(cellData == null ? "" : cellData.toString());
-                break;
-            }
-        }
-        final ClipboardContent clipboardContent = new ClipboardContent();
-        clipboardContent.putString(strb.toString());
-        Clipboard.getSystemClipboard().setContent(clipboardContent);
-
-        final KeyCodeCombination keyCodeCopy = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_ANY);
-        table.setOnKeyPressed(event -> {
-            if (keyCodeCopy.match(event)) {
-                copySelectionToClipboard(table);
-            }
-        });
     }
 
     public ObservableList<Project> getProjects() {
@@ -272,14 +253,18 @@ public class ProjectController implements Initializable {
 
         String name = nameActivityTF.getText();
         String desc = descActivityTA.getText();
+        String skillName = skillNameActivityTF.getText();
+        Competency competency = skillCompetencyActivityCB.getSelectionModel().getSelectedItem();
         Status status = statusActivityCB.getSelectionModel().getSelectedItem();
         availability timePerWeek = availabilityActivityCB.getSelectionModel().getSelectedItem();
         LocalDate start_date = start_dateActivityDP.getValue();
         LocalDate end_date = end_dateActivityDP.getValue();
 
-        if (!name.isEmpty() && !desc.isEmpty() && status != null && timePerWeek != null && start_date != null && end_date != null) {
+        if (!name.isEmpty() && !desc.isEmpty() && !skillName.isEmpty() && competency != null && status != null && timePerWeek != null && start_date != null && end_date != null) {
             // Set Project
-            project.setListOfActivities(new Activity(name, desc, status, timePerWeek, start_date, end_date));
+            Skill skill = new Skill(skillName, competency);
+
+            project.setListOfActivities(new Activity(name, desc, skill, status, timePerWeek, start_date, end_date));
 
             //Update that project in our Database
             DataManager.getInstance().addProjectsToDB(project);

@@ -31,6 +31,12 @@ public class CalendarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.users = DataManager.getInstance().getUsers();
+        for (User user : this.users) {
+            if (user instanceof Employee) {
+                Employee employee = (Employee) user;
+                employee.setCalendar();
+            }
+        }
         this.addCalendars();
         this.addEntry();
         this.setCalendarsUpdateTime();

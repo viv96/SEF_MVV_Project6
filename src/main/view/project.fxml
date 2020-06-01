@@ -26,12 +26,14 @@
                      </font>
                   </Label>
                   <JFXButton fx:id="submitAddActivity" layoutX="275.0" layoutY="535.0" onAction="#handleSubmitAddActivity" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
-                  <JFXComboBox fx:id="statusActivityCB" layoutX="176.0" layoutY="265.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
-                  <JFXTextField fx:id="nameActivityTF" layoutX="175.0" layoutY="129.0" prefWidth="300.0" promptText="Name (eg. WebApp)" />
-                  <JFXTextArea fx:id="descActivityTA" layoutX="175.0" layoutY="184.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
-                  <DatePicker fx:id="start_dateActivityDP" layoutX="176.0" layoutY="393.0" prefHeight="28.0" prefWidth="300.0" promptText="Start date" />
-                  <DatePicker fx:id="end_dateActivityDP" layoutX="175.0" layoutY="450.0" prefHeight="28.0" prefWidth="300.0" promptText="End date" />
-                  <JFXComboBox fx:id="availabilityActivityCB" layoutX="176.0" layoutY="325.0" prefHeight="25.0" prefWidth="300.0" promptText="Availability" />
+                  <JFXComboBox fx:id="statusActivityCB" layoutX="176.0" layoutY="322.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
+                  <JFXTextField fx:id="nameActivityTF" layoutX="175.0" layoutY="117.0" prefWidth="300.0" promptText="Name (eg. WebApp)" />
+                  <JFXTextArea fx:id="descActivityTA" layoutX="175.0" layoutY="162.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
+                  <DatePicker fx:id="start_dateActivityDP" layoutX="176.0" layoutY="412.0" prefHeight="28.0" prefWidth="300.0" promptText="Start date" />
+                  <DatePicker fx:id="end_dateActivityDP" layoutX="175.0" layoutY="460.0" prefHeight="28.0" prefWidth="300.0" promptText="End date" />
+                  <JFXComboBox fx:id="availabilityActivityCB" layoutX="176.0" layoutY="367.0" prefHeight="25.0" prefWidth="300.0" promptText="Availability" />
+                  <JFXTextField fx:id="skillNameActivityTF" layoutX="175.0" layoutY="232.0" prefWidth="300.0" promptText="Skill name (eg. Python)" />
+                  <JFXComboBox fx:id="skillCompetencyActivityCB" layoutX="175.0" layoutY="277.0" prefHeight="25.0" prefWidth="300.0" promptText="Skill competency" />
                </children>
             </Pane>
             <Pane fx:id="paneAddProject" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">

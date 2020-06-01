@@ -228,6 +228,7 @@ public class EmployeeController implements Initializable {
         // Set projects_id to that Employee
         if (project_id != null) {
             employee.setProjectsID(project_id);
+            employee.setCalendar();
 
             //Update that employee in our Database
             DataManager.getInstance().addUsersToDB(employee);

@@ -26,12 +26,13 @@
                      </font>
                   </Label>
                   <JFXButton fx:id="submitEditActivity" layoutX="275.0" layoutY="535.0" onAction="#handleSubmitEditActivity" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #4059a9;" text="Submit" textFill="WHITE" />
-                  <JFXComboBox fx:id="statusActivityCB" layoutX="176.0" layoutY="265.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
+                  <JFXComboBox fx:id="statusActivityCB" layoutX="176.0" layoutY="251.0" prefHeight="25.0" prefWidth="300.0" promptText="Status" />
                   <JFXTextField fx:id="nameActivityTF" layoutX="175.0" layoutY="129.0" prefWidth="300.0" promptText="Name (eg. WebApp)" />
-                  <JFXTextArea fx:id="descActivityTA" layoutX="175.0" layoutY="184.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
+                  <JFXTextArea fx:id="descActivityTA" layoutX="175.0" layoutY="173.0" prefHeight="50.0" prefWidth="300.0" promptText="Description (eg. ReactJS WebApp for Tesla)" />
                   <DatePicker fx:id="start_dateActivityDP" layoutX="176.0" layoutY="393.0" prefHeight="28.0" prefWidth="300.0" promptText="Start date" />
                   <DatePicker fx:id="end_dateActivityDP" layoutX="175.0" layoutY="450.0" prefHeight="28.0" prefWidth="300.0" promptText="End date" />
-                  <JFXComboBox fx:id="availabilityActivityCB" layoutX="176.0" layoutY="325.0" prefHeight="25.0" prefWidth="300.0" promptText="Availability" />
+                  <JFXComboBox fx:id="availabilityActivityCB" layoutX="176.0" layoutY="298.0" prefHeight="25.0" prefWidth="300.0" promptText="Availability" />
+                  <JFXComboBox fx:id="employeeActivityCB" layoutX="177.0" layoutY="347.0" prefHeight="25.0" prefWidth="300.0" promptText="Employee" />
                </children>
             </Pane>
             <Pane fx:id="paneTableView" prefHeight="600.0" prefWidth="650.0" style="-fx-background-color: white;">

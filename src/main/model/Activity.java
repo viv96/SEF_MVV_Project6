@@ -16,7 +16,7 @@ public class Activity implements Serializable {
     private String activityName;
     private String activityDescription;
     private ArrayList<String> actStaff = new ArrayList<String>();
-    private ArrayList<Activity> dependencies;
+    private ArrayList<Activity> dependencies = new ArrayList<Activity>();
     private double estimatedTimeInWeek;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -27,7 +27,7 @@ public class Activity implements Serializable {
     private double totalSlack = -1;
     private Status activityStatus;
     private availability dayPerWeek;
-    private ArrayList<Skill> listOfSkillsNeeded;
+    private ArrayList<Skill> listOfSkillsNeeded = new ArrayList<Skill>();
 
     public Activity(String name, String description, double duration, ArrayList<String> staffs_id, LocalDate startDate, LocalDate endDate, availability dayPerWeek, ArrayList<Activity> dependencies, ArrayList<Skill> skillRequired) {
         this.activityID = UUID.randomUUID().toString();
@@ -47,9 +47,10 @@ public class Activity implements Serializable {
         }
     }
 
-    public Activity(String name, String description, Status status, availability dayPerWeek, LocalDate startDate, LocalDate endDate) {
+    public Activity(String name, String description, Skill skill, Status status, availability dayPerWeek, LocalDate startDate, LocalDate endDate) {
         this.activityID = UUID.randomUUID().toString();
         this.activityStatus = status;
+        this.listOfSkillsNeeded.add(skill);
         this.startDate = startDate;
         this.endDate = endDate;
         this.dayPerWeek = dayPerWeek;
@@ -94,6 +95,14 @@ public class Activity implements Serializable {
 
     public void setSkillRequired(ArrayList<Skill> skillRequired) {
         this.listOfSkillsNeeded = skillRequired;
+    }
+
+    public void setSkillRequired(Skill skillRequired) {
+        this.listOfSkillsNeeded.add(skillRequired);
+    }
+
+    public void setActStaff(String employeeId) {
+        this.actStaff.add(employeeId);
     }
 
     public LocalDate getStartDate() {
