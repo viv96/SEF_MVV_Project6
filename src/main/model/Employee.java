@@ -150,9 +150,4 @@ public class Employee extends User {
 
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "model.employee [id = " + this.getId() + ", skill = " + this.skills + ", calendar = " + this.employeeCalendars + "]";
-    }
 }

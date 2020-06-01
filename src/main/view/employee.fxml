@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeController">
    <children>
-      <fx:include source="sidebar.fxml" fx:id="sidebar"></fx:include>
+      <fx:include fx:id="sidebar" source="sidebar.fxml" />
+      <TableView fx:id="employeeTV" layoutX="150.0" prefHeight="600.0" prefWidth="650.0">
+        <columns>
+            <TableColumn fx:id="idTC" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" text="id" />
+            <TableColumn fx:id="usernameTC" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" text="username" />
+            <TableColumn fx:id="skillsTC" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" text="skills" />
+            <TableColumn fx:id="projects_idTC" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" text="projects id" />
+            <TableColumn fx:id="actionsTC" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" text="actions" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

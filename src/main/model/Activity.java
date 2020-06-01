@@ -183,20 +183,4 @@ public class Activity implements Serializable {
             setActStatus(Status.OVER_DUE);
         }
     }
-
-    @Override
-    public String toString() {
-        return "model.Activity [id = " + this.activityID +
-        ", activityName: " + this.activityName +
-        ", activityDuration: " + this.estimatedTimeInWeek +
-        ", earlyStart: " + this.earlyStart + 
-        ", earlyFinish: " + this.earlyFinish +
-        ", lateStart: " + this.lateStart + 
-        ", lateFinish: " + this.lateFinish +
-        ", totalSlack: " + this.totalSlack + 
-        ", staff = " + this.actStaff +
-        ", Status = " + this.activityStatus.toString() +
-        ", startDate = " + this.startDate + 
-        ", endDate = " + this.endDate + "]";
-    }
 }

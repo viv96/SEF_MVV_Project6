@@ -50,11 +50,6 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        return !(id != null ? !id.equals(user.id) : user.id != null);
-    }
-
-    @Override
-    public String toString() {
-        return "user [id = " + this.id + ", name = " + this.name + ", password = " + this.password + "]";
+        return !(name != null ? !name.equals(user.name) : user.name != null);
     }
 }

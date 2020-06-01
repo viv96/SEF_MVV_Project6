@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -27,13 +28,19 @@
             </Label>
          </children>
       </Pane>
-      <JFXTextField fx:id="username" layoutX="481.0" layoutY="138.0" prefHeight="26.0" prefWidth="275.0" promptText="Username" />
-      <JFXPasswordField fx:id="password" layoutX="481.0" layoutY="204.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" />
-      <JFXPasswordField fx:id="confirmPassword" layoutX="481.0" layoutY="265.0" prefHeight="26.0" prefWidth="275.0" promptText="Confirm Password" />
-      <JFXButton fx:id="signUp" layoutX="560.0" layoutY="369.0" onAction="#handleSignUp" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #4059a9;" text="Sign up" textFill="WHITE" />
-      <Separator layoutX="459.0" layoutY="421.0" prefHeight="20.0" prefWidth="319.0" />
-      <Label alignment="BOTTOM_CENTER" layoutX="591.0" layoutY="422.0" prefHeight="18.0" prefWidth="52.0" style="-fx-background-color: #fff;" text="Or" />
-      <Label layoutX="481.0" layoutY="471.0" text="Already have an account ?" textFill="#4d4d4d" />
-      <JFXButton fx:id="signIn" layoutX="643.0" layoutY="466.0" onAction="#handleSignIn" prefHeight="27.0" prefWidth="114.0" style="-fx-border-color: #4059a9; -fx-background-color: #fff;" text="Sign in" textFill="#4059a9" />
+      <JFXTextField fx:id="username" layoutX="481.0" layoutY="130.0" prefHeight="26.0" prefWidth="275.0" promptText="Username" />
+      <JFXPasswordField fx:id="password" layoutX="481.0" layoutY="190.0" prefHeight="26.0" prefWidth="275.0" promptText="Password" />
+      <JFXPasswordField fx:id="confirmPassword" layoutX="481.0" layoutY="250.0" prefHeight="26.0" prefWidth="275.0" promptText="Confirm Password" />
+      <JFXButton fx:id="signUp" layoutX="560.0" layoutY="370.0" onAction="#handleSignUp" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #4059a9;" text="Sign up" textFill="WHITE" />
+      <Separator layoutX="459.0" layoutY="420.0" prefHeight="20.0" prefWidth="319.0" />
+      <Label alignment="BOTTOM_CENTER" layoutX="591.0" layoutY="420.0" prefHeight="18.0" prefWidth="52.0" style="-fx-background-color: #fff;" text="Or" />
+      <Label layoutX="459.0" layoutY="470.0" prefHeight="27.0" prefWidth="143.0" text="Already have an account ?" textFill="#4d4d4d" />
+      <JFXButton fx:id="signIn" layoutX="663.0" layoutY="470.0" onAction="#handleSignIn" prefHeight="27.0" prefWidth="114.0" style="-fx-border-color: #4059a9; -fx-background-color: #fff;" text="Sign in" textFill="#4059a9" />
+      <Label layoutX="582.0" layoutY="60.0" text="Register" textFill="#4059a9">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="managerCheckbox" layoutX="481.0" layoutY="310.0" prefHeight="18.0" prefWidth="275.0" text="Manager" />
    </children>
 </AnchorPane>
