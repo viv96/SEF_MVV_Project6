@@ -77,7 +77,7 @@ public class Employee extends User {
                             for (Skill activitySkill : activity.getSkillRequired()) {
                                 for (Skill userSkill : this.getSkills()) {
                                     if (activitySkill.getSkillName().equals(userSkill.getSkillName()) && activitySkill.getSkillLevel().ordinal() <= userSkill.getSkillLevel().ordinal()) {
-                                        this.employeeCalendars.add(new EmployeeCalendar(activity.getId(), activity.getName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
+                                        this.employeeCalendars.add(new EmployeeCalendar(activity.getActivityID(), activity.getActivityName(), activity.getStartDate(), activity.getEndDate(), this.weekAvailability));
                                     }
                                 }
                             }
@@ -96,7 +96,7 @@ public class Employee extends User {
 
     public Boolean setActivityStatus(Activity activity, Status status) {
         for (EmployeeCalendar employeeCalendar : employeeCalendars) {
-            if (activity.getId().equals(employeeCalendar.getId())) {
+            if (activity.getActivityID().equals(employeeCalendar.getId())) {
                 activity.setActStatus(status);
                 return true;
             }

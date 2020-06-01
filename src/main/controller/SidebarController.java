@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Activity;
 import model.UserSession;
 
 import java.io.IOException;
@@ -27,6 +28,23 @@ public class SidebarController {
         window.setScene(scene);
 
         ProjectController projectController = loader.<ProjectController>getController();
+
+        window.show();
+    }
+
+    @FXML
+    public void displayActivity(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/activity.fxml"));
+
+        Parent project = loader.load();
+
+        Scene scene = new Scene(project);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+
+        ActivityController activityController = loader.<ActivityController>getController();
 
         window.show();
     }

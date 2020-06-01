@@ -61,10 +61,16 @@ public class Activity implements Serializable {
     public double getEstimatedTimeInWeek() {
         return estimatedTimeInWeek;
     }
+
+    public String getActivityID() {
+        return this.activityID;
+    }
     
     public String getActivityName(){
         return this.activityName;
     }
+
+    public String getActivityDescription() { return this.activityDescription; }
 
     public ArrayList<Activity> getDependencies(){
         return this.dependencies;
@@ -80,14 +86,6 @@ public class Activity implements Serializable {
 
     public double getEarlyFinish() {
         return earlyFinish;
-    }
-
-    public String getName() {
-        return this.activityName;
-    }
-
-    public void setName(String name) {
-        this.activityName = name;
     }
 
     public ArrayList<Skill> getSkillRequired() {
@@ -127,6 +125,14 @@ public class Activity implements Serializable {
     }
 
     //Setter methods
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public void setActivityDescription(String activityDescription) {
+        this.activityDescription = activityDescription;
+    }
+
     public void setEstimatedTimeInWeek(double estimatedTimeInWeek) {
         this.estimatedTimeInWeek = estimatedTimeInWeek;
     }
@@ -153,14 +159,6 @@ public class Activity implements Serializable {
 
     public void setActStatus(Status activityStatus) {
         this.activityStatus = activityStatus;
-    }
-
-    public String getId() {
-        return this.activityID;
-    }
-
-    public void setId(String id) {
-        this.activityID = id;
     }
 
     public ArrayList<String> getStaffs_id() {

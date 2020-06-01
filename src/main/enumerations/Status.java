@@ -6,6 +6,6 @@ public enum Status {
     TO_DO,
     PENDING,
     IN_PROGRESS,
-    COMPLETED,
+    CLOSED,
     OVER_DUE;
 }

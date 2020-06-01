@@ -57,8 +57,20 @@ public class Project implements Serializable {
         return listOfActivities;
     }
 
-    public void setListOfActivities(Activity activity) {
-        listOfActivities.add(activity);
+    public void setListOfActivities(Activity activityToAdd) {
+        Integer idx = 0;
+
+        // Replace current value of activity if it's already exist
+        for (Activity activity : listOfActivities) {
+            if (activity.getActivityID().equals(activityToAdd.getActivityID())) {
+                listOfActivities.set(idx, activityToAdd);
+                return ;
+            }
+            idx++;
+        }
+
+        // Otherwise add a new activity
+        listOfActivities.add(activityToAdd);
     }
 
     public LocalDate getProjectStartDate() {
