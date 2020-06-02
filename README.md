@@ -7,7 +7,7 @@ Software Engineering Project for RMIT - A simple JavaFX Application using JFoeni
 Library required to run this project : 
 - JavaFX 11.0.2
 - Java 11.0.7
-- JFoenix 9.0.8
+- JFoenix 9.0.8 : https://github.com/jfoenixadmin/JFoenix
 - JUnit 5.4
 - CalendarFX 11.8.3 : https://github.com/dlemmermann/CalendarFX
 
